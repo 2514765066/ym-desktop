@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import ManageView from "@/views/Manage/index.vue";
+import TaskbarView from "@/views/Taskbar/index.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -17,6 +18,10 @@ const router = createRouter({
           component: () => import("@/views/Manage/TaskBar/index.vue"),
         },
       ],
+    },
+    {
+      path: "/taskbar",
+      component: TaskbarView,
     },
   ],
 });

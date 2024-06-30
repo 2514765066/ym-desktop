@@ -1,6 +1,6 @@
 {
   "show": false,
-  "position": { "y": 900 },
-  "shadow": true,
-  "icon": ["Edge.lnk", "Chrome.lnk"]
+  "x": 0,
+  "y": 0,
+  "icons": ["Edge.lnk", "Chrome.lnk"]
 }

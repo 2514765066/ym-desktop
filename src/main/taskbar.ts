@@ -1,22 +1,17 @@
 import { createWindow, onMounted } from "ym-electron.js";
 
-import { taskbarData } from "../store/index";
-// import { join } from "node:path";
-// import { readdirSync } from "node:fs";
-
-const data = taskbarData.get();
-
 onMounted(() => {
   createWindow("taskbar", {
+    x: 2000,
+    y: -100,
     devTool: true,
-    width: data.icon.length * 80 + 40,
+    width: 500,
     height: 120,
+    transparent: true,
 
-    position: data.position,
-
-    expandCenter: {
-      vertical: true,
-    },
+    // expandCenter: {
+    //   vertical: true,
+    // },
 
     render: {
       dev: {
@@ -28,14 +23,3 @@ onMounted(() => {
     },
   });
 });
-
-// const iconDir = readdirSync(iconPath);
-
-// if (iconDir.length !== data.icon.length) {
-//   iconDir.forEach(fileName => {
-//     const path = join(iconPath, fileName);
-//     const base64 = fileIcon(path).toString("base64");
-
-//   });
-//   // data.icon =
-// }

@@ -1,6 +1,10 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { electronAPI } from "@electron-toolkit/preload";
-import { EventNames } from "../type";
+import { EventNames, Icons } from "../type";
+import { readFile, readdir } from "fs/promises";
+import { config, icons } from "../hooks/usePath";
+import { join } from "path";
+import getFileIcon = require("extract-file-icon");
 
 const api = {
   //最小化
@@ -19,6 +23,35 @@ const api = {
   close() {
     // @ts-ignore
     ipcRenderer.send<EventNames>("close");
+  },
+
+  //读取配置
+  async getConfig(name: "taskbar" | "clock" | "music") {
+    const path = join(config, `${name}.json`);
+
+    const res = await readFile(path);
+
+    return JSON.parse(res.toString());
+  },
+
+  //读取图标
+  async getIcons() {
+    const res: Icons = [];
+
+    const dir = await readdir(icons);
+
+    for (const name of dir) {
+      const path = join(icons, name);
+
+      const base64 = getFileIcon(path, 48).toString("base64");
+
+      res.push({
+        name,
+        path,
+        src: `data:image/png;base64,${base64}`,
+      });
+    }
+    return res;
   },
 };
 

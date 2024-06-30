@@ -2,7 +2,7 @@ import { setGlobalCreateWindowOption } from "ym-electron.js";
 import { join } from "node:path";
 import "../hooks/ipc";
 import "./manage";
-// import "./taskbar";
+import "./taskbar";
 
 setGlobalCreateWindowOption({
   frame: false,

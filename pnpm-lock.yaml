@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      extract-file-icon:
+        specifier: ^0.3.2
+        version: 0.3.2
     devDependencies:
       '@electron-toolkit/preload':
         specifier: ^3.0.0
@@ -32,9 +36,6 @@ importers:
       element-plus:
         specifier: ^2.7.6
         version: 2.7.6(vue@3.4.21(typescript@5.4.3))
-      extract-file-icon:
-        specifier: ^0.3.2
-        version: 0.3.2
       pinia:
         specifier: ^2.1.7
         version: 2.1.7(typescript@5.4.3)(vue@3.4.21(typescript@5.4.3))
@@ -74,9 +75,6 @@ importers:
       ym-electron.js:
         specifier: ^1.0.5
         version: 1.0.5
-      ym-flat.ui:
-        specifier: ^0.0.13
-        version: 0.0.13(typescript@5.4.3)
 
 packages:
 
@@ -2095,9 +2093,6 @@ packages:
     peerDependencies:
       vue: ^3.2.0
 
-  vue-sonner@1.1.2:
-    resolution: {integrity: sha512-yg4f5s0a3oiiI7cNvO0Dajux1Y7s04lxww3vnQtnwQawJ3KqaKA9RIRMdI9wGTosRGIOwgYFniFRGl4+IuKPZw==}
-
   vue-template-compiler@2.7.16:
     resolution: {integrity: sha512-AYbUWAJHLGGQM7+cNTELw+KsOG9nl2CnSv467WobS5Cv9uk3wFcnr1Etsz2sEIHEZvw1U+o9mRlEO6QbZvUPGQ==}
 
@@ -2168,9 +2163,6 @@ packages:
 
   ym-electron.js@1.0.5:
     resolution: {integrity: sha512-e5x/OxFOY3YC+yvF818IxjTknLYFGRkTn3o6Sf+Fmb/WszUdOrHOtLdvqS/XbTEAhWwKrWYKWDVP/z7Av2WGEQ==}
-
-  ym-flat.ui@0.0.13:
-    resolution: {integrity: sha512-0APdUWKp916SF+wYcMc63HqKtR3U27OgJ5H6nBIy/4Yxi8eZQvD9J46St7rZ65SrogszHepu60cgLv4k/6PqXQ==}
 
   zip-stream@4.1.1:
     resolution: {integrity: sha512-9qv4rlDiopXg4E69k+vMHjNN63YFMe9sZMrdlvKnCjlCRWeCBswPPMPUfx+ipsAWq1LXHe70RcbaHdJJpS6hyQ==}
@@ -4287,8 +4279,6 @@ snapshots:
       '@vue/devtools-api': 6.6.1
       vue: 3.4.21(typescript@5.4.3)
 
-  vue-sonner@1.1.2: {}
-
   vue-template-compiler@2.7.16:
     dependencies:
       de-indent: 1.0.2
@@ -4365,14 +4355,6 @@ snapshots:
       electron: 29.1.6
     transitivePeerDependencies:
       - supports-color
-
-  ym-flat.ui@0.0.13(typescript@5.4.3):
-    dependencies:
-      vue: 3.4.21(typescript@5.4.3)
-      vue-sonner: 1.1.2
-      ym-easy.css: 1.0.10
-    transitivePeerDependencies:
-      - typescript
 
   zip-stream@4.1.1:
     dependencies:
