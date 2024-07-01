@@ -2,5 +2,7 @@
   "show": false,
   "x": 0,
   "y": 0,
+  "backgroundColor": "#000",
+  "borderRadius": "10px",
   "icons": ["Edge.lnk", "Chrome.lnk"]
 }

@@ -2,7 +2,7 @@
   <section class="row v-n-c">
     <slot name="icon"></slot>
 
-    <span class="c-fff fs-14 mr">{{ label }}</span>
+    <span class="c-fff fs-14 ml-1r mr">{{ label }}</span>
 
     <slot></slot>
   </section>

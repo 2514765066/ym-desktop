@@ -4,7 +4,7 @@ import { EventNames, Icons } from "../type";
 import { readFile, readdir } from "fs/promises";
 import { config, icons } from "../hooks/usePath";
 import { join } from "path";
-import getFileIcon = require("extract-file-icon");
+import getFileIcon from "extract-file-icon";
 
 const api = {
   //最小化

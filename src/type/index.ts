@@ -12,6 +12,10 @@ export type TaskbarConfig = {
   show: boolean;
   x: number;
   y: number;
+  height: number;
+  backgroundColor: string;
+  borderRadius: number;
+  iconsSize: number;
   icons: string[];
 };
 
