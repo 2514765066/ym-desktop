@@ -1,22 +1,23 @@
 import { defineStore } from "pinia";
 import { TaskbarConfig } from "@type";
+import { debounce } from "@/hooks/useDebounce";
 
 export const useTaskbarStore = defineStore("taskbar", () => {
   const { path } = useRoute();
 
   const data = ref<TaskbarConfig>({
     show: false,
-    move: true,
-    height: 60,
-    borderRadius: 30,
-    iconsSize: 30,
-    iconsGap: 20,
-    backgroundColor: "rgba(34, 34, 34, 0.95)",
-    splitColor: "#ccc",
-    iconsTipPosition: 20,
+    move: false,
+    height: 0,
+    borderRadius: 0,
+    paddingX: 0,
+    iconsSize: 0,
+    iconsGap: 0,
+    backgroundColor: "",
+    splitColor: "",
+    iconsTipPosition: 0,
     iconsTipShow: false,
     iconsShadow: false,
-    icons: [],
   });
 
   const get = async () => {
@@ -24,12 +25,16 @@ export const useTaskbarStore = defineStore("taskbar", () => {
   };
 
   if (path.includes("manage")) {
+    const write = debounce(value => {
+      api.writeConfig("taskbar", value);
+    }, 300);
+
     watch(
       data,
       val => {
         const value = JSON.parse(JSON.stringify(val));
 
-        api.writeConfig("taskbar", value);
+        write(value);
 
         electron.ipcRenderer.send("update:config", "taskbar", value);
       },

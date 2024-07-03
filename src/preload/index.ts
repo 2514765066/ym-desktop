@@ -6,7 +6,7 @@ import { config, icons } from "../hooks/usePath";
 import { join } from "path";
 import getFileIcon from "extract-file-icon";
 
-type ConfigNames = "taskbar" | "clock" | "music";
+type ConfigNames = "taskbar" | "clock" | "icons";
 
 const api = {
   //最小化

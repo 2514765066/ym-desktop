@@ -20,13 +20,23 @@
     />
   </Row>
 
+  <Row label="内边距" des="任务栏两端内边距">
+    <span class="mr-1r fs-14">{{ data.paddingX }}</span>
+    <el-slider
+      v-model="data.paddingX"
+      :min="0"
+      :show-tooltip="false"
+      style="width: 280px"
+    />
+  </Row>
+
   <Row label="背景颜色" des="任务栏背景颜色">
     <el-color-picker
       v-model="data.backgroundColor"
       show-alpha
       color-format="hex"
       popper-class="el-color-picker-dropdown"
-      @active-change="val => (data.backgroundColor = val)"
+      @active-change="val => (data.backgroundColor = val!)"
     />
   </Row>
 
@@ -36,7 +46,7 @@
       show-alpha
       color-format="hex"
       popper-class="el-color-picker-dropdown"
-      @active-change="val => (data.backgroundColor = val)"
+      @active-change="val => (data.splitColor = val!)"
     />
   </Row>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <router-link v-if="to" :to="to" class="row v-n-c">
+  <router-link v-if="to" :to="to" class="row v-n-c" draggable="false">
     <slot name="icon">
       <img src="@/assets/restore.svg" width="20" />
     </slot>

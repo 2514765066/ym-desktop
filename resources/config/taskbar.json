@@ -5,12 +5,12 @@
   "y": 0,
   "height": 80,
   "borderRadius": 15,
+  "paddingX": 40,
   "iconsSize": 40,
   "iconsGap": 40,
   "iconsTipPosition": 60,
   "iconsTipShow": true,
   "iconsShadow": true,
-  "backgroundColor": "#FFFFFF8C",
-  "splitColor": "#CCCCCCFF",
-  "icons": []
+  "backgroundColor": "#FFFFFF00",
+  "splitColor": "#CCCCCCFF"
 }

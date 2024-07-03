@@ -14,6 +14,7 @@ export type TaskbarConfig = {
   show: boolean;
   move: boolean;
   height: number;
+  paddingX: number;
   backgroundColor: string;
   splitColor: string;
   borderRadius: number;
@@ -22,11 +23,12 @@ export type TaskbarConfig = {
   iconsTipPosition: number;
   iconsTipShow: boolean;
   iconsShadow: boolean;
-  icons: string[];
 };
 
-export type Icons = {
+export type Icon = {
   name: string;
   src: string;
   path: string;
-}[];
+};
+
+export type Icons = Icon[];

@@ -1,19 +1,37 @@
 <template>
   <section>
     <div class="v-n-c g-1r">
-      <span @click="go('/manage/taskbar')">主页</span>
-      <img src="@/assets/arrowRight.svg" width="22" />
-      <span class="active">图标</span>
+      <router-link :to="homeRoute.path" :class="{ active: inHome }">
+        {{ homeRoute.meta.label }}
+      </router-link>
+
+      <img src="@/assets/arrowRight.svg" width="22" v-show="!inHome" />
+
+      <span v-show="!inHome" :class="{ active: !inHome }">
+        {{ route.meta.label }}
+      </span>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
 const router = useRouter();
+const route = useRoute();
 
-const go = (path: string) => {
-  router.push(path);
-};
+const homeRoute = computed(() => {
+  const res = route.path
+    .split("/")
+    .filter(item => item)
+    .slice(0, 2);
+
+  return router.getRoutes().find(({ path }) => {
+    return path == `/${res.join("/")}/home`;
+  })!;
+});
+
+const inHome = computed(() => {
+  return route.meta.label == "主页";
+});
 </script>
 
 <style scoped lang="scss">
@@ -22,7 +40,8 @@ section {
   padding: 0 1.5rem;
 
   > div {
-    > span {
+    > span,
+    a {
       font-size: 26px;
       color: #ccc;
 
