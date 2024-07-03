@@ -16,6 +16,24 @@ const router = createRouter({
         {
           path: "taskbar",
           component: () => import("@/views/Manage/TaskBar/index.vue"),
+          children: [
+            {
+              path: "",
+              redirect: "/manage/taskbar/home",
+            },
+            {
+              path: "home",
+              component: () => import("@/views/Manage/TaskBar/Home/index.vue"),
+            },
+            {
+              path: "style",
+              component: () => import("@/views/Manage/TaskBar/Style/index.vue"),
+            },
+            {
+              path: "icon",
+              component: () => import("@/views/Manage/TaskBar/Icon/index.vue"),
+            },
+          ],
         },
       ],
     },

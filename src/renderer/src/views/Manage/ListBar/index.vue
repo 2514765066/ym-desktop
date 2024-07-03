@@ -5,7 +5,7 @@
       :key="label"
       :to="to"
       class="v-n-c pl-1r fs-14 p-r"
-      :class="{ active: path == to }"
+      :class="{ active: path.includes(to) }"
     >
       {{ label }}
     </router-link>
@@ -23,10 +23,6 @@ const list = [
   {
     label: "时钟",
     to: "/manage/clock",
-  },
-  {
-    label: "音乐",
-    to: "/manage/music",
   },
 ];
 </script>

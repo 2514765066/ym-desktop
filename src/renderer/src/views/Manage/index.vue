@@ -2,7 +2,8 @@
   <div class="wh-100 manage">
     <title-bar></title-bar>
     <list-bar></list-bar>
-    <main class="h g-2">
+    <breadcrumb></breadcrumb>
+    <main class="h">
       <router-view></router-view>
     </main>
   </div>
@@ -10,6 +11,7 @@
 
 <script setup lang="ts">
 import TitleBar from "./TitleBar/index.vue";
+import Breadcrumb from "./Breadcrumb/index.vue";
 import ListBar from "./ListBar/index.vue";
 </script>
 
@@ -18,18 +20,20 @@ import ListBar from "./ListBar/index.vue";
   background-color: #191919;
   gap: 5px;
   display: grid;
-  grid-template-rows: 38px 1fr;
+  grid-template-rows: 38px 50px 1fr;
   grid-template-columns: 280px 1fr;
   grid-template-areas:
     "TitleBar TitleBar"
+    "ListBar Breadcrumb"
     "ListBar Content";
 
   > main {
     padding: 0 1.5rem;
     grid-area: Content;
+    gap: 6px;
 
     .el-input-number {
-      width: 100px;
+      width: 120px;
 
       .el-input__wrapper {
         --el-input-bg-color: #272727 !important;
@@ -97,12 +101,19 @@ import ListBar from "./ListBar/index.vue";
 }
 
 .el-color-picker-dropdown {
-  .el-color-dropdown__link-btn,
-  .el-color-dropdown__btn {
+  background-color: #1d1e1f !important;
+
+  .el-color-dropdown__btns {
+    display: flex;
+    align-items: center;
+  }
+
+  .el-color-dropdown__link-btn {
     display: none !important;
   }
+
   .el-color-dropdown__value {
-    width: 100%;
+    flex: 1;
   }
 }
 </style>

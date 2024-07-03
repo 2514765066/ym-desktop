@@ -40,4 +40,12 @@ eventEmitter.on("success:show", (message: string) => {
 .c-ccc {
   color: #ccc;
 }
+
+.l-h-12 {
+  line-height: 12px;
+}
+
+.l-h-14 {
+  line-height: 14px;
+}
 </style>

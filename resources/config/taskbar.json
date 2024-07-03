@@ -1,8 +1,16 @@
 {
-  "show": false,
+  "show": true,
+  "move": true,
   "x": 0,
   "y": 0,
-  "backgroundColor": "#000",
-  "borderRadius": "10px",
-  "icons": ["Edge.lnk", "Chrome.lnk"]
+  "height": 80,
+  "borderRadius": 15,
+  "iconsSize": 40,
+  "iconsGap": 40,
+  "iconsTipPosition": 60,
+  "iconsTipShow": true,
+  "iconsShadow": true,
+  "backgroundColor": "#FFFFFF8C",
+  "splitColor": "#CCCCCCFF",
+  "icons": []
 }

@@ -1,10 +1,12 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { electronAPI } from "@electron-toolkit/preload";
 import { EventNames, Icons } from "../type";
-import { readFile, readdir } from "fs/promises";
+import { readFile, readdir, writeFile } from "fs/promises";
 import { config, icons } from "../hooks/usePath";
 import { join } from "path";
 import getFileIcon from "extract-file-icon";
+
+type ConfigNames = "taskbar" | "clock" | "music";
 
 const api = {
   //最小化
@@ -26,7 +28,7 @@ const api = {
   },
 
   //读取配置
-  async getConfig(name: "taskbar" | "clock" | "music") {
+  async getConfig(name: ConfigNames) {
     const path = join(config, `${name}.json`);
 
     const res = await readFile(path);
@@ -46,12 +48,19 @@ const api = {
       const base64 = getFileIcon(path, 48).toString("base64");
 
       res.push({
-        name,
+        name: name.split(".")[0],
         path,
         src: `data:image/png;base64,${base64}`,
       });
     }
     return res;
+  },
+
+  //写入配置
+  async writeConfig(name: ConfigNames, data: any) {
+    const path = join(config, `${name}.json`);
+
+    await writeFile(path, JSON.stringify(data, null, 2));
   },
 };
 
