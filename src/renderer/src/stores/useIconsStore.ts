@@ -30,11 +30,27 @@ export const useIconsStore = defineStore("icons", () => {
     );
   };
 
+  const remove = (name: string) => {
+    const index = data.value.findIndex(item => item.name == name);
+
+    data.value.splice(index, 1);
+  };
+
+  const rename = (oldName: string, newName: string) => {
+    data.value.forEach(item => {
+      if (item.name == oldName) {
+        item.name = newName;
+      }
+    });
+  };
+
   get();
 
   return {
     data,
     get,
     update,
+    remove,
+    rename,
   };
 });

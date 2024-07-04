@@ -13,7 +13,6 @@
     <span class="mr-1r fs-14">{{ data.iconsTipPosition }}</span>
     <el-slider
       v-model="data.iconsTipPosition"
-      :min="-data.height"
       :max="data.height"
       :show-tooltip="false"
       style="width: 280px"
@@ -24,7 +23,6 @@
     <span class="mr-1r fs-14">{{ data.iconsSize }}</span>
     <el-slider
       v-model="data.iconsSize"
-      :min="0"
       :max="data.height"
       :show-tooltip="false"
       style="width: 280px"
@@ -35,7 +33,6 @@
     <span class="mr-1r fs-14">{{ data.iconsGap }}</span>
     <el-slider
       v-model="data.iconsGap"
-      :min="0"
       :show-tooltip="false"
       style="width: 280px"
     />

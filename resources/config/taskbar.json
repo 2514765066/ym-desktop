@@ -8,7 +8,7 @@
   "paddingX": 40,
   "iconsSize": 40,
   "iconsGap": 40,
-  "iconsTipPosition": 60,
+  "iconsTipPosition": 20,
   "iconsTipShow": true,
   "iconsShadow": true,
   "backgroundColor": "#FFFFFF00",
