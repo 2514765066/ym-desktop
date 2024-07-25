@@ -7,10 +7,10 @@
   "borderRadius": 15,
   "paddingX": 40,
   "iconsSize": 40,
-  "iconsGap": 40,
+  "iconsGap": 30,
   "iconsTipPosition": 20,
   "iconsTipShow": true,
-  "iconsShadow": true,
+  "iconsShadow": false,
   "backgroundColor": "#FFFFFF00",
   "splitColor": "#CCCCCCFF"
 }

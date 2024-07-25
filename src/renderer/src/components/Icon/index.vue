@@ -1,67 +1,105 @@
 <template>
-  <section class="p-r v-c-n">
+  <section
+    class="p-r v-c-n"
+    @contextmenu="handleRemove"
+    @mouseup="handleAddSplit"
+  >
     <el-tooltip
       effect="light"
-      :hide-after="0"
       placement="top"
+      :hide-after="150"
       :offset="taskbarConfig.data.value.iconsTipPosition"
-      :disabled="!taskbarConfig.data.value.iconsTipShow"
+      :disabled="disabled"
+      @hide="handleRename"
     >
-      <img :src="data.src" class="click handle" />
+      <img :src="data.src" class="click" />
 
       <template #content>
-        <span class="fs-12">{{ data.name }}</span>
-        <!-- <el-button size="small" style="width: 56px" @click="isRename = true">
-          重命名
-        </el-button>
-
-        <el-button
+        <el-input
+          ref="rename_input"
           size="small"
-          type="danger"
-          style="width: 56px"
-          @click="remove(data.name)"
-        >
-          删除
-        </el-button> -->
+          style="width: 80px"
+          v-model="name"
+          v-if="isRename"
+        ></el-input>
+
+        <span @dblclick="handleDblclick" v-else>
+          {{ data.name }}
+        </span>
       </template>
     </el-tooltip>
-
-    <!-- <span class="p-a">
-      <span class="fs-12" v-if="!isRename">{{ data.name }}</span>
-      <el-input
-        size="small"
-        placeholder="请输入名称"
-        style="width: 130px"
-        v-model="name"
-        :autofocus="true"
-        @blur="rename(data.name, name)"
-        v-else
-      />
-    </span> -->
   </section>
 </template>
 
 <script setup lang="ts">
 import { Icon } from "@type";
-import { ElPopover, ElButton, ElInput, ElTooltip } from "element-plus";
+import { ElTooltip, ElInput } from "element-plus";
 import { useIconsStore } from "@/stores/useIconsStore";
 import { useTaskbarStore } from "@/stores/useTaskbarStore";
+
+const taskbarConfig = storeToRefs(useTaskbarStore());
+const { remove, rename, addSplit } = useIconsStore();
 
 const props = defineProps<{
   data: Icon;
 }>();
 
-const taskbarConfig = storeToRefs(useTaskbarStore());
-const { remove, rename } = useIconsStore();
+//输入框的实例
+const rename_input = ref();
 
+//是否进入重命名
 const isRename = ref(false);
 
+//新名称
 const name = ref(props.data.name);
+
+//提示信息是否显示
+const disabled = computed(() => {
+  return !taskbarConfig.data.value.iconsTipShow || !props.data.src;
+});
+
+//双击进入重命名
+const handleDblclick = () => {
+  isRename.value = true;
+
+  nextTick(() => {
+    rename_input.value.focus();
+  });
+};
+
+//重命名
+const handleRename = () => {
+  if (!isRename.value) return;
+
+  isRename.value = false;
+  rename(props.data.name, name.value);
+};
+
+//移除
+const handleRemove = () => {
+  remove(props.data.name);
+};
+
+//处理添加分隔符
+const handleAddSplit = (e: MouseEvent) => {
+  if (e.button == 1) {
+    addSplit(props.data.name);
+  }
+};
 </script>
 
 <style scoped lang="scss">
 section {
-  > img {
+  min-width: 5px;
+
+  > img[src=""] {
+    border-radius: 1px;
+    width: 1.5px;
+    height: calc(var(--iconsSize) * 0.9);
+    background-color: var(--splitColor);
+  }
+
+  > img:not([src=""]) {
     width: var(--iconsSize);
     height: var(--iconsSize);
     -webkit-box-reflect: var(--iconsShadow);
@@ -69,21 +107,7 @@ section {
 
     &:hover {
       transform: scale(1.3);
-      & + span {
-        display: var(--iconsTipShow);
-      }
     }
-  }
-
-  > span {
-    border-radius: 5px;
-    display: v-bind("isRename?'block':'none'");
-    bottom: var(--iconsTipPosition);
-    background-color: #1d1e1f;
-    padding: 5px 10px;
-    white-space: nowrap;
-    border: 1px solid #414243;
-    box-shadow: 0 0 3px #1d1e1f;
   }
 }
 </style>

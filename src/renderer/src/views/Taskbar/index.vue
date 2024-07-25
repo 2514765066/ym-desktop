@@ -3,12 +3,9 @@
     v-model="icons.data"
     class="v-c-c taskbar"
     :animation="150"
-    handle=".handle"
     @end="update"
   >
     <Icon v-for="item of icons.data" :key="item.name" :data="item"></Icon>
-
-    <!-- <aside></aside> -->
   </vue-draggable>
 </template>
 
@@ -21,6 +18,14 @@ import { useTaskbarStore } from "@/stores/useTaskbarStore";
 const icons = useIconsStore();
 const { update } = useIconsStore();
 const { data } = storeToRefs(useTaskbarStore());
+
+window.addEventListener("mousemove", ({ target }) => {
+  const el = target as HTMLElement;
+
+  const bool = el.id == "app";
+
+  electron.ipcRenderer.send("ignoreMouseEvents", bool);
+});
 </script>
 
 <style lang="scss">
@@ -52,11 +57,5 @@ const { data } = storeToRefs(useTaskbarStore());
   border-radius: var(--borderRadius);
   background-color: var(--backgroundColor);
   gap: var(--iconsGap);
-
-  > aside {
-    width: 1px;
-    height: var(iconsSize);
-    background-color: var(--splitColor);
-  }
 }
 </style>

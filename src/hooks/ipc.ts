@@ -1,4 +1,4 @@
-import { windows } from "ym-electron.js";
+import { windows, fromWebContents } from "ym-electron.js";
 import { ipcMain } from "./useIpcMain";
 import { EventNames } from "../type";
 
@@ -18,6 +18,14 @@ ipcMain.on("maximize", () => {
 ipcMain.on("close", () => {
   const win = windows.get("manage")!;
   win.close();
+});
+
+//鼠标是否穿透窗口
+ipcMain.on("ignoreMouseEvents", ({ sender }, bool: boolean) => {
+  const win = fromWebContents(sender);
+  win.setIgnoreMouseEvents(bool, {
+    forward: true,
+  });
 });
 
 //更新配置

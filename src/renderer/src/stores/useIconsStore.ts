@@ -6,7 +6,6 @@ export const useIconsStore = defineStore("icons", () => {
 
   const get = async () => {
     data.value = await api.getIcons();
-
     const order = await api.getConfig("icons");
     sort(order);
   };
@@ -33,6 +32,8 @@ export const useIconsStore = defineStore("icons", () => {
   const remove = (name: string) => {
     const index = data.value.findIndex(item => item.name == name);
 
+    api.removeIcon(data.value[index].path);
+
     data.value.splice(index, 1);
   };
 
@@ -40,9 +41,30 @@ export const useIconsStore = defineStore("icons", () => {
     data.value.forEach(item => {
       if (item.name == oldName) {
         item.name = newName;
+        api.renameIcon(item.path, item.name);
       }
     });
   };
+
+  const addSplit = (name: string) => {
+    const index = data.value.findIndex(item => item.name == name);
+
+    data.value.splice(index + 1, 0, {
+      name: "",
+      src: "",
+      path: "",
+    });
+  };
+
+  watch(
+    data,
+    () => {
+      update();
+    },
+    {
+      deep: true,
+    }
+  );
 
   get();
 
@@ -52,5 +74,6 @@ export const useIconsStore = defineStore("icons", () => {
     update,
     remove,
     rename,
+    addSplit,
   };
 });

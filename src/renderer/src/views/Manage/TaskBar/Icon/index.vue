@@ -13,7 +13,7 @@
     <span class="mr-1r fs-14">{{ data.iconsTipPosition }}</span>
     <el-slider
       v-model="data.iconsTipPosition"
-      :max="data.height"
+      :max="data.height / 2"
       :show-tooltip="false"
       style="width: 280px"
     />

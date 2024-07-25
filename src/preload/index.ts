@@ -1,9 +1,9 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { electronAPI } from "@electron-toolkit/preload";
 import { EventNames, Icons } from "../type";
-import { readFile, readdir, writeFile } from "fs/promises";
+import { readFile, readdir, writeFile, rename, unlink } from "fs/promises";
 import { config, icons } from "../hooks/usePath";
-import { join } from "path";
+import { extname, join } from "path";
 import getFileIcon from "extract-file-icon";
 
 type ConfigNames = "taskbar" | "clock" | "icons";
@@ -53,6 +53,13 @@ const api = {
         src: `data:image/png;base64,${base64}`,
       });
     }
+
+    res.push({
+      name: "",
+      path: "",
+      src: "",
+    });
+
     return res;
   },
 
@@ -61,6 +68,19 @@ const api = {
     const path = join(config, `${name}.json`);
 
     await writeFile(path, JSON.stringify(data, null, 2));
+  },
+
+  //重命名图标
+  async renameIcon(oldPath: string, newName: string) {
+    const ext = extname(oldPath);
+    const newPath = join(icons, `${newName}${ext}`);
+
+    await rename(oldPath, newPath);
+  },
+
+  //删除图标
+  async removeIcon(path: string) {
+    await unlink(path);
   },
 };
 

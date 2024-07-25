@@ -1,12 +1,11 @@
+import { join } from "path";
 import { createWindow, onMounted } from "ym-electron.js";
 
 onMounted(() => {
-  createWindow("taskbar", {
+  const win = createWindow("taskbar", {
     x: 2000,
     y: -100,
     devTool: true,
-    width: 500,
-    height: 120,
     transparent: true,
 
     // expandCenter: {
@@ -19,7 +18,12 @@ onMounted(() => {
       },
       dep: {
         hash: "taskbar",
+        path: join(__dirname, "../renderer/index.html"),
       },
     },
+  });
+
+  win.on("system-context-menu", e => {
+    e.preventDefault();
   });
 });

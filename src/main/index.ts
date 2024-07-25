@@ -11,12 +11,6 @@ setGlobalCreateWindowOption({
   // skipTaskbar: true,
   // devTool: false,
 
-  render: {
-    dep: {
-      path: join(__dirname, "../renderer/index.html"),
-    },
-  },
-
   webPreferences: {
     preload: join(__dirname, "../preload/index.mjs"),
     sandbox: false,

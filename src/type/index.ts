@@ -3,6 +3,7 @@ const eventNames = [
   "close",
   "maximize",
   "is:maximize",
+  "ignoreMouseEvents",
 
   "get:icons",
   "update:config",
