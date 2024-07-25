@@ -24,11 +24,17 @@
     des="任务栏图标大小，间距，文字提示"
     to="/manage/taskbar/icon"
   ></Row>
+
+  <Row
+    label="快捷键"
+    des="配置任务栏快捷键"
+    to="/manage/taskbar/shortcut"
+  ></Row>
 </template>
 
 <script setup lang="ts">
 import { ElSwitch } from "element-plus";
-import Row from "@/components/Row/index.vue";
+import Row from "@/components/Row.vue";
 import { useTaskbarStore } from "@/stores/useTaskbarStore";
 
 const { data } = storeToRefs(useTaskbarStore());

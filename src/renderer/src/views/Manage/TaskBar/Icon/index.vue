@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import { ElSlider, ElSwitch } from "element-plus";
-import Row from "@/components/Row/index.vue";
+import Row from "@/components/Row.vue";
 import { useTaskbarStore } from "@/stores/useTaskbarStore";
 
 const { data } = storeToRefs(useTaskbarStore());

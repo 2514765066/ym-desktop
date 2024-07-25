@@ -42,6 +42,14 @@ const router = createRouter({
                 label: "图标",
               },
             },
+            {
+              path: "shortcut",
+              component: () =>
+                import("@/views/Manage/TaskBar/Shortcut/index.vue"),
+              meta: {
+                label: "快捷键",
+              },
+            },
           ],
         },
       ],
