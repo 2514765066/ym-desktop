@@ -1,9 +1,9 @@
-import { contextBridge, ipcRenderer } from "electron";
+import { contextBridge, ipcRenderer, shell } from "electron";
 import { electronAPI } from "@electron-toolkit/preload";
-import { EventNames, Icons } from "../type";
-import { readFile, readdir, writeFile, rename, unlink } from "fs/promises";
-import { config, icons } from "../hooks/usePath";
-import { extname, join } from "path";
+import { EventNames } from "../type";
+import { readFile, writeFile } from "fs/promises";
+import { config } from "../hooks/usePath";
+import { join } from "path";
 import getFileIcon from "extract-file-icon";
 
 type ConfigNames = "taskbar" | "clock" | "icons";
@@ -36,33 +36,6 @@ const api = {
     return JSON.parse(res.toString());
   },
 
-  //读取图标
-  async getIcons() {
-    const res: Icons = [];
-
-    const dir = await readdir(icons);
-
-    for (const name of dir) {
-      const path = join(icons, name);
-
-      const base64 = getFileIcon(path, 48).toString("base64");
-
-      res.push({
-        name: name.split(".")[0],
-        path,
-        src: `data:image/png;base64,${base64}`,
-      });
-    }
-
-    res.push({
-      name: "",
-      path: "",
-      src: "",
-    });
-
-    return res;
-  },
-
   //写入配置
   async writeConfig(name: ConfigNames, data: any) {
     const path = join(config, `${name}.json`);
@@ -70,17 +43,15 @@ const api = {
     await writeFile(path, JSON.stringify(data, null, 2));
   },
 
-  //重命名图标
-  async renameIcon(oldPath: string, newName: string) {
-    const ext = extname(oldPath);
-    const newPath = join(icons, `${newName}${ext}`);
-
-    await rename(oldPath, newPath);
+  //获取图标
+  getIcon(path: string) {
+    const base64 = getFileIcon(path, 48).toString("base64");
+    return `data:image/png;base64,${base64}`;
   },
 
-  //删除图标
-  async removeIcon(path: string) {
-    await unlink(path);
+  //打开文件
+  openPath(path: string) {
+    shell.openPath(path);
   },
 };
 

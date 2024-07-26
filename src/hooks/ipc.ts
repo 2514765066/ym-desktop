@@ -32,3 +32,16 @@ ipcMain.on("ignoreMouseEvents", ({ sender }, bool: boolean) => {
 ipcMain.on("update:config", (_, name: string, data: any) => {
   windows.get(name)?.webContents.send<EventNames>("update:config", data);
 });
+
+//修改宽高
+ipcMain.on("setSize", ({ sender }, width, height) => {
+  const win = fromWebContents(sender);
+  if (!win.resizable) {
+    win.setResizable(true);
+    win.setSize(width, height);
+    win.setResizable(false);
+    return;
+  }
+
+  win.setSize(width, height);
+});

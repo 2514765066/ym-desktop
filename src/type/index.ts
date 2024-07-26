@@ -4,9 +4,8 @@ const eventNames = [
   "maximize",
   "is:maximize",
   "ignoreMouseEvents",
-
-  "get:icons",
   "update:config",
+  "setSize",
 ] as const;
 
 export type EventNames = (typeof eventNames)[number];
@@ -24,12 +23,15 @@ export type TaskbarConfig = {
   iconsTipPosition: number;
   iconsTipShow: boolean;
   iconsShadow: boolean;
+  removeIconKey: string;
+  addSplitKey: string;
 };
 
 export type Icon = {
+  id: string;
   name: string;
-  src: string;
   path: string;
+  isSplit?: boolean;
 };
 
 export type Icons = Icon[];

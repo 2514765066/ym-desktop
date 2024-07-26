@@ -1,4 +1,6 @@
 <template>
+  <el-alert title="移动状态下无法把文件拖拽到任务栏上" type="info" show-icon />
+
   <Row label="显示" des="任务栏是否显示">
     <span class="fs-14 mr-1r">{{ data.show ? "开" : "关" }}</span>
     <el-switch v-model="data.show" />
@@ -33,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { ElSwitch } from "element-plus";
+import { ElSwitch, ElAlert } from "element-plus";
 import Row from "@/components/Row.vue";
 import { useTaskbarStore } from "@/stores/useTaskbarStore";
 

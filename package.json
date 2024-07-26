@@ -39,6 +39,7 @@
     "node": "18.18.2"
   },
   "dependencies": {
-    "extract-file-icon": "^0.3.2"
+    "extract-file-icon": "^0.3.2",
+    "nanoid": "^5.0.7"
   }
 }

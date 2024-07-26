@@ -1,16 +1,13 @@
 [
-  "AI",
-  "Chrome",
-  "Edge",
-  "Minecraft",
-  "Navicat16",
-  "Notion",
-  "OCS",
-  "PS2023",
-  "QQ",
-  "VS2022",
-  "VSCode",
-  "ym-video",
-  "钉钉",
-  ""
+  {
+    "id": "J1ENwYF6UvUVx2E2irKvu",
+    "name": "实习",
+    "path": "F:\\系统存储\\桌面\\实习"
+  },
+  {
+    "id": "AXzwY_Lsc-YtzHYnY2nbQ",
+    "name": "",
+    "path": "",
+    "isSplit": true
+  }
 ]

@@ -1,65 +1,56 @@
 import { defineStore } from "pinia";
 import { Icons } from "@type";
+import { useTaskbarStore } from "./useTaskbarStore";
+import { nanoid } from "nanoid";
 
 export const useIconsStore = defineStore("icons", () => {
+  const taskbarConfig = useTaskbarStore();
+
   const data = ref<Icons>([]);
 
+  //当前选中的图标名称
+  const selectedID = ref("");
+
+  //获取配置
   const get = async () => {
-    data.value = await api.getIcons();
-    const order = await api.getConfig("icons");
-    sort(order);
+    data.value = await api.getConfig("icons");
   };
 
-  const sort = (order: string[]) => {
-    data.value.sort((a, b) => {
-      let indexA = order.indexOf(a.name);
-      let indexB = order.indexOf(b.name);
-
-      if (indexA === -1) indexA = order.length;
-      if (indexB === -1) indexB = order.length;
-
-      return indexA - indexB;
-    });
+  //重命名图标
+  const rename = (index: number, newName: string) => {
+    data.value[index].name = newName;
   };
 
-  const update = () => {
-    api.writeConfig(
-      "icons",
-      data.value.map(item => item.name)
-    );
-  };
+  //注册按键
+  document.addEventListener("keydown", e => {
+    if (!selectedID.value) return;
 
-  const remove = (name: string) => {
-    const index = data.value.findIndex(item => item.name == name);
+    const index = data.value.findIndex(item => item.id == selectedID.value);
 
-    api.removeIcon(data.value[index].path);
+    if (index == -1) return;
 
-    data.value.splice(index, 1);
-  };
+    //移除图标
+    if (e.key == taskbarConfig.data.removeIconKey) {
+      data.value.splice(index, 1);
+      return;
+    }
 
-  const rename = (oldName: string, newName: string) => {
-    data.value.forEach(item => {
-      if (item.name == oldName) {
-        item.name = newName;
-        api.renameIcon(item.path, item.name);
-      }
-    });
-  };
-
-  const addSplit = (name: string) => {
-    const index = data.value.findIndex(item => item.name == name);
-
-    data.value.splice(index + 1, 0, {
-      name: "",
-      src: "",
-      path: "",
-    });
-  };
+    //添加分割线
+    if (e.key == taskbarConfig.data.addSplitKey) {
+      data.value.splice(index + 1, 0, {
+        id: nanoid(),
+        name: "",
+        path: "",
+        isSplit: true,
+      });
+      return;
+    }
+  });
 
   watch(
     data,
     () => {
-      update();
+      api.writeConfig("icons", JSON.parse(JSON.stringify(data.value)));
     },
     {
       deep: true,
@@ -70,10 +61,8 @@ export const useIconsStore = defineStore("icons", () => {
 
   return {
     data,
+    selectedID,
     get,
-    update,
-    remove,
     rename,
-    addSplit,
   };
 });

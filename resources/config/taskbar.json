@@ -1,16 +1,18 @@
 {
   "show": true,
-  "move": true,
+  "move": false,
   "x": 0,
   "y": 0,
   "height": 80,
   "borderRadius": 15,
   "paddingX": 40,
-  "iconsSize": 40,
+  "iconsSize": 48,
   "iconsGap": 30,
-  "iconsTipPosition": 20,
+  "iconsTipPosition": 25,
   "iconsTipShow": true,
   "iconsShadow": false,
-  "backgroundColor": "#FFFFFF00",
-  "splitColor": "#CCCCCCFF"
+  "backgroundColor": "#0000008A",
+  "splitColor": "#CCCCCCFF",
+  "removeIconKey": "Delete",
+  "addSplitKey": "Insert"
 }

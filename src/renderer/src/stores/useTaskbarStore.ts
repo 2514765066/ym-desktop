@@ -18,6 +18,8 @@ export const useTaskbarStore = defineStore("taskbar", () => {
     iconsTipPosition: 0,
     iconsTipShow: false,
     iconsShadow: false,
+    removeIconKey: "",
+    addSplitKey: "",
   });
 
   const get = async () => {
@@ -33,9 +35,7 @@ export const useTaskbarStore = defineStore("taskbar", () => {
       data,
       val => {
         const value = JSON.parse(JSON.stringify(val));
-
         write(value);
-
         electron.ipcRenderer.send("update:config", "taskbar", value);
       },
       {
