@@ -20,10 +20,11 @@
   </Row>
 
   <Row label="大小" des="图标大小">
-    <span class="mr-1r fs-14">{{ data.iconsSize }}</span>
+    <span class="mr-1r fs-14">{{ data.iconsSize - 8 }}</span>
     <el-slider
       v-model="data.iconsSize"
-      :max="data.height"
+      :min="8"
+      :max="data.height + 8"
       :show-tooltip="false"
       style="width: 280px"
     />

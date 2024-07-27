@@ -3,6 +3,7 @@ import { join } from "node:path";
 import "../hooks/ipc";
 import "./manage";
 import "./taskbar";
+import "./clock";
 
 setGlobalCreateWindowOption({
   frame: false,

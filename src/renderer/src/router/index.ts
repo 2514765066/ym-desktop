@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import ManageView from "@/views/Manage/index.vue";
 import TaskbarView from "@/views/Taskbar/index.vue";
+import ClockView from "@/views/Clock/index.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -52,11 +53,32 @@ const router = createRouter({
             },
           ],
         },
+        {
+          path: "clock",
+          component: () => import("@/views/Manage/Clock/index.vue"),
+          children: [
+            {
+              path: "",
+              redirect: "/manage/clock/home",
+            },
+            {
+              path: "home",
+              component: () => import("@/views/Manage/Clock/Home/index.vue"),
+              meta: {
+                label: "主页",
+              },
+            },
+          ],
+        },
       ],
     },
     {
       path: "/taskbar",
       component: TaskbarView,
+    },
+    {
+      path: "/clock",
+      component: ClockView,
     },
   ],
 });

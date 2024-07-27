@@ -6,6 +6,8 @@ const eventNames = [
   "ignoreMouseEvents",
   "update:config",
   "setSize",
+  "center",
+  "show",
 ] as const;
 
 export type EventNames = (typeof eventNames)[number];

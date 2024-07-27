@@ -1,5 +1,5 @@
 <template>
-  <main class="taskbar">
+  <main>
     <vue-draggable
       v-model="icons.data"
       class="v-c-c"
@@ -27,23 +27,6 @@ import { nanoid } from "nanoid";
 const icons = useIconsStore();
 const { data } = storeToRefs(useTaskbarStore());
 
-//取消鼠标穿透的范围
-const padding = 10;
-
-//监视动态设置宽高
-watchEffect(() => {
-  const width =
-    icons.data.length == 0
-      ? data.value.paddingX * 2 + padding * 2
-      : padding * 2 +
-        icons.data.length * data.value.iconsSize +
-        (icons.data.length - 1) * data.value.iconsGap +
-        data.value.paddingX * 2 +
-        4;
-  const height = data.value.height * 3;
-  electron.ipcRenderer.send("setSize", width, height);
-});
-
 //把桌面应用拖拽到任务栏上
 const handleDrop = (event: DragEvent) => {
   event.preventDefault();
@@ -65,6 +48,20 @@ const handleDragover = (event: DragEvent) => {
   event.preventDefault();
 };
 
+//监视动态设置宽高
+watchEffect(() => {
+  const width =
+    icons.data.length == 0
+      ? data.value.paddingX * 2 + 20
+      : 20 +
+        icons.data.length * data.value.iconsSize +
+        (icons.data.length - 1) * data.value.iconsGap +
+        data.value.paddingX * 2 +
+        4;
+  const height = data.value.height * 3;
+  electron.ipcRenderer.send("setSize", width, height);
+});
+
 //鼠标穿透
 onMounted(() => {
   document.body.addEventListener("mouseover", ({ target }) => {
@@ -83,7 +80,7 @@ onMounted(() => {
 }
 
 main {
-  padding: calc(v-bind("padding") * 1px);
+  padding: 10px;
 
   > div {
     --move: v-bind("data.move? 'drag':'no-drag'");

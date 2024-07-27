@@ -1,5 +1,10 @@
 <template>
-  <el-alert title="鼠标右键点击图标即可选中" type="info" show-icon />
+  <el-alert
+    title="鼠标右键点击图标即可选中"
+    type="info"
+    show-icon
+    class="f-s-0"
+  />
 
   <Row label="删除图标" des="选中图标后删除图标的快捷键">
     <Shortcut v-model="data.removeIconKey"></Shortcut>

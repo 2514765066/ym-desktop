@@ -3,7 +3,7 @@
     <span class="mr-1r fs-14">{{ data.height }}</span>
     <el-slider
       v-model="data.height"
-      :min="0"
+      :min="30"
       :max="150"
       :show-tooltip="false"
       style="width: 280px"
@@ -15,6 +15,7 @@
     <el-slider
       v-model="data.borderRadius"
       :min="0"
+      :max="data.height / 2"
       :show-tooltip="false"
       style="width: 280px"
     />

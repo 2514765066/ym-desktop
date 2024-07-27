@@ -30,7 +30,9 @@ ipcMain.on("ignoreMouseEvents", ({ sender }, bool: boolean) => {
 
 //更新配置
 ipcMain.on("update:config", (_, name: string, data: any) => {
-  windows.get(name)?.webContents.send<EventNames>("update:config", data);
+  const win = windows.get(name)!;
+
+  win.webContents.send<EventNames>("update:config", data);
 });
 
 //修改宽高
@@ -44,4 +46,18 @@ ipcMain.on("setSize", ({ sender }, width, height) => {
   }
 
   win.setSize(width, height);
+});
+
+//居中
+ipcMain.on("center", (_, name: string, option) => {
+  const win = windows.get(name)!;
+
+  win.expandCenter(option);
+});
+
+//显示隐藏
+ipcMain.on("show", (_, name: string, isShow) => {
+  const win = windows.get(name)!;
+
+  isShow ? win.show() : win.hide();
 });

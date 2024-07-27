@@ -5,7 +5,7 @@
       :key="label"
       :to="to"
       class="v-n-c pl-1r fs-14 p-r"
-      :class="{ active: path.includes(to) }"
+      :class="{ active: route.path.includes(to) }"
     >
       {{ label }}
     </router-link>
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-const { path } = useRoute();
+const route = useRoute();
 
 const list = [
   {

@@ -1,18 +1,21 @@
 <template>
   <div class="wh-100 manage">
     <title-bar></title-bar>
+
     <list-bar></list-bar>
+
     <breadcrumb></breadcrumb>
-    <main class="h">
+
+    <main class="h o-h">
       <router-view></router-view>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import TitleBar from "./TitleBar/index.vue";
-import Breadcrumb from "./Breadcrumb/index.vue";
-import ListBar from "./ListBar/index.vue";
+import TitleBar from "@/components/TitleBar.vue";
+import Breadcrumb from "@/components/Breadcrumb.vue";
+import ListBar from "@/components/ListBar.vue";
 </script>
 
 <style lang="scss">
@@ -115,5 +118,24 @@ import ListBar from "./ListBar/index.vue";
   .el-color-dropdown__value {
     flex: 1;
   }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInRight {
+  animation-duration: 0.5s;
+  animation-name: fadeInRight;
 }
 </style>

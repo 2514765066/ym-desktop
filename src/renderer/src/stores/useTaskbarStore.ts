@@ -1,8 +1,10 @@
 import { defineStore } from "pinia";
 import { TaskbarConfig } from "@type";
 import { debounce } from "@/hooks/useDebounce";
+import { useIconsStore } from "./useIconsStore";
 
 export const useTaskbarStore = defineStore("taskbar", () => {
+  const icons = useIconsStore();
   const { path } = useRoute();
 
   const data = ref<TaskbarConfig>({
@@ -31,6 +33,7 @@ export const useTaskbarStore = defineStore("taskbar", () => {
       api.writeConfig("taskbar", value);
     }, 300);
 
+    //检测配置改动自动写入
     watch(
       data,
       val => {
@@ -42,6 +45,12 @@ export const useTaskbarStore = defineStore("taskbar", () => {
         deep: true,
       }
     );
+
+    //监视显示隐藏
+    watchEffect(() => {
+      const isShow = data.value.show;
+      electron.ipcRenderer.send("show", "taskbar", isShow);
+    });
   } else {
     electron.ipcRenderer.on("update:config", (_, value: any) => {
       data.value = value;
