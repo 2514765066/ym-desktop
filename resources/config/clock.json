@@ -1,1 +1,6 @@
-{"show":true,"x":"110","y":"170","fontFamily":"Futura Lt BT","color":"#ffffff","fontSize":"90"}
+{
+  "show": true,
+  "fontFamily": "Futura Lt BT",
+  "color": "#ffffff",
+  "fontSize": 90
+}

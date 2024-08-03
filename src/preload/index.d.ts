@@ -6,4 +6,10 @@ declare global {
   const __APP_VERSION__: string;
   const electron: ElectronAPI<EventNames>;
   const api: Api;
+
+  const queryLocalFonts: () => Promise<
+    {
+      family: string;
+    }[]
+  >;
 }

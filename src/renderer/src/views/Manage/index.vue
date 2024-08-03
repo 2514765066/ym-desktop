@@ -31,9 +31,14 @@ import ListBar from "@/components/ListBar.vue";
     "ListBar Content";
 
   > main {
-    padding: 0 1.5rem;
+    padding: 0 1.5rem 1.5rem;
     grid-area: Content;
     gap: 6px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
 
     .el-input-number {
       width: 120px;
@@ -51,6 +56,11 @@ import ListBar from "@/components/ListBar.vue";
         width: 100% !important;
         height: 100% !important;
       }
+    }
+
+    .el-select {
+      width: 200px;
+      background-color: #272727;
     }
 
     .el-switch {

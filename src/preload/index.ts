@@ -1,12 +1,10 @@
 import { contextBridge, ipcRenderer, shell } from "electron";
 import { electronAPI } from "@electron-toolkit/preload";
-import { EventNames } from "../type";
+import { EventNames, ConfigNames } from "../type";
 import { readFile, writeFile } from "fs/promises";
 import { config } from "../hooks/usePath";
 import { join } from "path";
 import getFileIcon from "extract-file-icon";
-
-type ConfigNames = "taskbar" | "clock" | "icons";
 
 const api = {
   //最小化

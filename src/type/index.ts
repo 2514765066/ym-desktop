@@ -10,6 +10,8 @@ const eventNames = [
   "show",
 ] as const;
 
+export type ConfigNames = "taskbar" | "clock" | "icons";
+
 export type EventNames = (typeof eventNames)[number];
 
 export type TaskbarConfig = {
@@ -27,6 +29,14 @@ export type TaskbarConfig = {
   iconsShadow: boolean;
   removeIconKey: string;
   addSplitKey: string;
+};
+
+export type ClockConfig = {
+  show: boolean;
+  move: boolean;
+  color: string;
+  fontSize: number;
+  fontFamily: string;
 };
 
 export type Icon = {
