@@ -4,9 +4,9 @@ import { join } from "path";
 
 onMounted(() => {
   const win = createWindow("manage", {
-    x: 2000,
+    x: 3000,
     y: -100,
-    devTool: true,
+    // devTool: true,
 
     render: {
       dev: {

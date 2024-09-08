@@ -1,6 +1,22 @@
 {
   "show": true,
-  "fontFamily": "Futura Lt BT",
-  "color": "#ffffff",
-  "fontSize": 90
+  "move": true,
+  "timeX": 0,
+  "timeY": 0,
+  "timeColor": "#FFFFFFFF",
+  "timeSize": 100,
+  "timeFamily": "Futura Lt BT",
+  "timeStyle": "hh:mm",
+  "dayX": 0,
+  "dayY": 100,
+  "dayColor": "#FFFFFFFF",
+  "daySize": 50,
+  "dayFamily": "Futura Lt BT",
+  "dayStyle": "",
+  "monthX": 50,
+  "monthY": 100,
+  "monthColor": "#FFFFFFFF",
+  "monthSize": 50,
+  "monthFamily": "Futura Lt BT",
+  "monthStyle": "english"
 }

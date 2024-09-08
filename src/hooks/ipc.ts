@@ -36,8 +36,9 @@ ipcMain.on("update:config", (_, name: string, data: any) => {
 });
 
 //修改宽高
-ipcMain.on("setSize", ({ sender }, width, height) => {
+ipcMain.on("setSize", ({ sender }, width: number, height: number) => {
   const win = fromWebContents(sender);
+
   if (!win.resizable) {
     win.setResizable(true);
     win.setSize(width, height);
@@ -48,6 +49,13 @@ ipcMain.on("setSize", ({ sender }, width, height) => {
   win.setSize(width, height);
 });
 
+//修改位置
+ipcMain.on("setPosition", (_, name: string, x: number, y: number) => {
+  const win = windows.get(name)!;
+
+  win.setPosition(x, y);
+});
+
 //居中
 ipcMain.on("center", (_, name: string, option) => {
   const win = windows.get(name)!;
@@ -56,8 +64,8 @@ ipcMain.on("center", (_, name: string, option) => {
 });
 
 //显示隐藏
-ipcMain.on("show", (_, name: string, isShow) => {
-  const win = windows.get(name)!;
+ipcMain.on("show", (_, name: string, isShow: boolean) => {
+  const win = windows.get(name);
 
-  isShow ? win.show() : win.hide();
+  isShow ? win?.show() : win?.hide();
 });

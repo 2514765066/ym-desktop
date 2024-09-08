@@ -14,8 +14,8 @@ export const initConfig = (name: ConfigNames, data: Ref<any>) => {
       data,
       val => {
         const value = JSON.parse(JSON.stringify(val));
-        write(value);
         electron.ipcRenderer.send("update:config", name, value);
+        write(value);
       },
       {
         deep: true,

@@ -1,17 +1,24 @@
 export const isFullScreen = ref(false);
 
-export function close() {
+export const close = () => {
   api.close();
-}
+};
 
-export function maximize() {
+export const maximize = () => {
   api.maximize();
-}
+};
 
-export function minimize() {
+export const minimize = () => {
   api.minimize();
-}
+};
 
 electron.ipcRenderer.on("is:maximize", (_, res: boolean) => {
   isFullScreen.value = res;
 });
+
+//设置窗口位置
+export const handleResetPositon = (name: string, x: number, y: number) => {
+  electron.ipcRenderer.send("setPosition", name, x, y);
+};
+
+//

@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="p-2">
     <vue-draggable
       v-model="icons.data"
       class="v-c-c"
@@ -41,7 +41,7 @@ const handleDrop = (event: DragEvent) => {
     };
   });
 
-  icons.data.push(...files);
+  icons.add(files);
 };
 
 const handleDragover = (event: DragEvent) => {
@@ -58,7 +58,9 @@ watchEffect(() => {
         (icons.data.length - 1) * data.value.iconsGap +
         data.value.paddingX * 2 +
         4;
+
   const height = data.value.height * 3;
+
   electron.ipcRenderer.send("setSize", width, height);
 });
 
@@ -80,8 +82,6 @@ onMounted(() => {
 }
 
 main {
-  padding: 10px;
-
   > div {
     --move: v-bind("data.move? 'drag':'no-drag'");
     --height: calc(v-bind("data.height") * 1px);

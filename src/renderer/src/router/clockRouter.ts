@@ -23,10 +23,17 @@ export default {
       },
     },
     {
-      path: "date",
-      component: () => import("@/views/Manage/Clock/Date.vue"),
+      path: "day",
+      component: () => import("@/views/Manage/Clock/Day.vue"),
       meta: {
         label: "日期",
+      },
+    },
+    {
+      path: "month",
+      component: () => import("@/views/Manage/Clock/Month.vue"),
+      meta: {
+        label: "月份",
       },
     },
   ],

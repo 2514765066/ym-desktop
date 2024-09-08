@@ -1,10 +1,8 @@
 import { contextBridge, ipcRenderer, shell } from "electron";
 import { electronAPI } from "@electron-toolkit/preload";
 import { EventNames, ConfigNames } from "../type";
-import { readFile, writeFile } from "fs/promises";
-import { config } from "../hooks/usePath";
-import { join } from "path";
 import getFileIcon from "extract-file-icon";
+import { writeJson, readJson } from "../hooks/useFs";
 
 const api = {
   //最小化
@@ -26,19 +24,13 @@ const api = {
   },
 
   //读取配置
-  async getConfig(name: ConfigNames) {
-    const path = join(config, `${name}.json`);
-
-    const res = await readFile(path);
-
-    return JSON.parse(res.toString());
+  async readConfig(name: ConfigNames) {
+    return await readJson(name);
   },
 
   //写入配置
   async writeConfig(name: ConfigNames, data: any) {
-    const path = join(config, `${name}.json`);
-
-    await writeFile(path, JSON.stringify(data, null, 2));
+    writeJson(name, data);
   },
 
   //获取图标

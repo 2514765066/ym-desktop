@@ -87,6 +87,7 @@ import ListBar from "@/components/ListBar.vue";
     }
 
     .el-slider {
+      width: 280px;
       --el-slider-main-bg-color: #bdbbe6 !important;
       --el-slider-runway-bg-color: #666 !important;
       --el-slider-height: 4px !important;
@@ -96,6 +97,11 @@ import ListBar from "@/components/ListBar.vue";
         border: none !important;
         box-shadow: 0 0 5px #000 !important;
       }
+    }
+
+    .el-input {
+      width: 200px;
+      background-color: #272727;
     }
   }
 }

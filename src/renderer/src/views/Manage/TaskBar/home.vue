@@ -37,9 +37,14 @@
     des="配置任务栏快捷键"
     to="/manage/taskbar/shortcut"
   ></Row>
+
+  <Row label="重置位置" des="重置任务栏到屏幕最左上角">
+    <Button @click="handleResetPositon('taskbar', 0, 0)">重置</Button>
+  </Row>
 </template>
 
 <script setup lang="ts">
+import { handleResetPositon } from "@/hooks/useControls";
 import Button from "@/components/Button.vue";
 import { ElSwitch, ElAlert } from "element-plus";
 import Row from "@/components/Row.vue";

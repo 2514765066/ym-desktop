@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { Icons } from "@type";
+import { Icons, Files } from "@type";
 import { useTaskbarStore } from "./useTaskbarStore";
 import { nanoid } from "nanoid";
 
@@ -13,12 +13,25 @@ export const useIconsStore = defineStore("icons", () => {
 
   //获取配置
   const get = async () => {
-    data.value = await api.getConfig("icons");
+    data.value = await api.readConfig("icons");
   };
 
   //重命名图标
   const rename = (index: number, newName: string) => {
     data.value[index].name = newName;
+  };
+
+  //添加
+  const add = (arr: Files) => {
+    const pathArr = data.value.map(item => item.path);
+
+    for (const item of arr) {
+      if (pathArr.includes(item.path)) {
+        return;
+      }
+
+      data.value.push(item);
+    }
   };
 
   //注册按键
@@ -47,10 +60,11 @@ export const useIconsStore = defineStore("icons", () => {
     }
   });
 
+  //写入文件
   watch(
     data,
-    () => {
-      api.writeConfig("icons", JSON.parse(JSON.stringify(data.value)));
+    val => {
+      api.writeConfig("icons", JSON.parse(JSON.stringify(val)));
     },
     {
       deep: true,
@@ -63,6 +77,7 @@ export const useIconsStore = defineStore("icons", () => {
     data,
     selectedID,
     get,
+    add,
     rename,
   };
 });

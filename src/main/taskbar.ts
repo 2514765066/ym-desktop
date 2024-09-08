@@ -1,11 +1,11 @@
 import { join } from "path";
 import { createWindow, onMounted } from "ym-electron.js";
+import { writeJson, readJson } from "../hooks/useFs";
+import { debounce } from "../hooks/useDebounce";
 
 onMounted(() => {
-  createWindow("taskbar", {
-    x: 2000,
-    y: -100,
-    // devTool: true,
+  const win = createWindow("taskbar", {
+    devTool: true,
     transparent: true,
     resizable: false,
 
@@ -19,4 +19,19 @@ onMounted(() => {
       },
     },
   });
+
+  const writeDebounce = debounce(position => {
+    writeJson("taskbarPos", position);
+  }, 300);
+
+  win.on("move", () => {
+    const position = win.getPosition();
+
+    writeDebounce(position);
+  });
+
+  (async () => {
+    const [x = 0, y = 0] = await readJson("taskbarPos");
+    win.setPosition(x, y);
+  })();
 });
