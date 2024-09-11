@@ -2,33 +2,25 @@
   <Row label="高度" des="任务栏高度">
     <span class="mr-1r fs-14">{{ data.height }}</span>
     <el-slider
-      v-model="data.height"
+      v-model.lazy="data.height"
       :min="30"
       :max="150"
       :show-tooltip="false"
-      style="width: 280px"
     />
   </Row>
 
   <Row label="圆角" des="任务栏圆角">
     <span class="mr-1r fs-14">{{ data.borderRadius }}</span>
     <el-slider
-      v-model="data.borderRadius"
-      :min="0"
+      v-model.lazy="data.borderRadius"
       :max="data.height / 2"
       :show-tooltip="false"
-      style="width: 280px"
     />
   </Row>
 
   <Row label="内边距" des="任务栏两端内边距">
     <span class="mr-1r fs-14">{{ data.paddingX }}</span>
-    <el-slider
-      v-model="data.paddingX"
-      :min="0"
-      :show-tooltip="false"
-      style="width: 280px"
-    />
+    <el-slider v-model.lazy="data.paddingX" :show-tooltip="false" />
   </Row>
 
   <Row label="背景颜色" des="任务栏背景颜色">

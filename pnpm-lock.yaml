@@ -14,6 +14,9 @@ importers:
       nanoid:
         specifier: ^5.0.7
         version: 5.0.7
+      ym-electron.js:
+        specifier: ^1.0.5
+        version: 1.0.5
     devDependencies:
       '@electron-toolkit/preload':
         specifier: ^3.0.0
@@ -75,9 +78,6 @@ importers:
       ym-easy.css:
         specifier: ^1.0.10
         version: 1.0.10
-      ym-electron.js:
-        specifier: ^1.0.5
-        version: 1.0.5
 
 packages:
 
@@ -1150,8 +1150,8 @@ packages:
       '@swc/core':
         optional: true
 
-  electron@29.1.6:
-    resolution: {integrity: sha512-UIYfpHR9gRBFKHyejHuXUVQ7nNzZRnoPVOHlijkvqR+DSLwgJ2ZcVVt0LNduNeO8PhPkY1+6kHonL52OTC1cOw==}
+  electron@29.4.6:
+    resolution: {integrity: sha512-fz8ndj8cmmf441t4Yh2FDP3Rn0JhLkVGvtUf2YVMbJ5SdJPlc0JWll9jYkhh60jDKVVCr/tBAmfxqRnXMWJpzg==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -3297,7 +3297,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@29.1.6:
+  electron@29.4.6:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 20.12.3
@@ -4369,7 +4369,7 @@ snapshots:
 
   ym-electron.js@1.0.5:
     dependencies:
-      electron: 29.1.6
+      electron: 29.4.6
     transitivePeerDependencies:
       - supports-color
 

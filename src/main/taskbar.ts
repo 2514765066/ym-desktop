@@ -5,9 +5,10 @@ import { debounce } from "../hooks/useDebounce";
 
 onMounted(() => {
   const win = createWindow("taskbar", {
-    devTool: true,
+    // devTool: true,
     transparent: true,
     resizable: false,
+    skipTaskbar: true,
 
     render: {
       dev: {

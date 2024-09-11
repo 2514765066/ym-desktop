@@ -40,13 +40,29 @@ export const nowDate = ref({
 const getDate = () => {
   const currentDate = new Date();
 
-  nowDate.value.month = currentDate.getMonth().toString();
-  nowDate.value.day = (currentDate.getDay() + 1).toString();
-  nowDate.value.hours = currentDate.getHours().toString().padStart(2, "0");
-  nowDate.value.minutes = currentDate.getMinutes().toString().padStart(2, "0");
+  const month = currentDate.getMonth().toString();
+  const day = (currentDate.getDay() + 1).toString();
+  const hours = currentDate.getHours().toString().padStart(2, "0");
+  const minutes = currentDate.getMinutes().toString().padStart(2, "0");
+
+  if (month != nowDate.value.month) {
+    nowDate.value.month = month;
+  }
+
+  if (day != nowDate.value.day) {
+    nowDate.value.day = day;
+  }
+
+  if (hours != nowDate.value.hours) {
+    nowDate.value.hours = hours;
+  }
+
+  if (minutes != nowDate.value.minutes) {
+    nowDate.value.minutes = minutes;
+  }
 };
 
-setInterval(getDate, 1000 * 60);
+setInterval(getDate, 10000);
 getDate();
 
 export const replaceTimeString = (str: string) => {

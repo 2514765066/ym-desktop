@@ -13,7 +13,11 @@ export const useIconsStore = defineStore("icons", () => {
 
   //获取配置
   const get = async () => {
-    data.value = await api.readConfig("icons");
+    const config = await api.readConfig("icons");
+
+    if (config.length == 0) return;
+
+    data.value = config;
   };
 
   //重命名图标

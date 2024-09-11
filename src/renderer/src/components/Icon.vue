@@ -4,41 +4,26 @@
     :class="{ active: isEidt }"
     @contextmenu="handleContextMenu"
   >
-    <el-tooltip
-      effect="light"
-      placement="top"
-      :hide-after="100"
+    <img
+      :src="src"
+      @click="openPath"
+      @mouseenter="disabled = true"
+      @mouseleave="disabled = false"
+    />
+
+    <icon-tip
       :offset="taskbarConfig.data.iconsTipPosition"
+      :label="data.name"
       :visible="visible"
-      @hide="handleRename"
-    >
-      <img
-        :src="src"
-        @click="openPath"
-        @mouseenter="disabled = true"
-        @mouseleave="disabled = false"
-      />
-
-      <template #content>
-        <el-input
-          size="small"
-          style="width: 80px"
-          v-model="newName"
-          v-if="isEidt"
-          maxlength="10"
-        ></el-input>
-
-        <span v-else style="margin: 0 6px">
-          {{ data.name }}
-        </span>
-      </template>
-    </el-tooltip>
+      :max="10"
+      @blur="handleRename"
+    ></icon-tip>
   </section>
 </template>
 
 <script setup lang="ts">
+import IconTip from "@/components/IconTip.vue";
 import { Icon } from "@type";
-import { ElTooltip, ElInput } from "element-plus";
 import { useIconsStore } from "@/stores/useIconsStore";
 import { useTaskbarStore } from "@/stores/useTaskbarStore";
 
@@ -75,9 +60,6 @@ const visible = computed(() => {
 //图标
 const src = ref(props.data.isSplit ? "" : api.getIcon(props.data.path));
 
-//新名称
-const newName = ref(props.data.name);
-
 //处理右键
 const handleContextMenu = () => {
   if (selectedID.value == props.data.id) {
@@ -89,12 +71,12 @@ const handleContextMenu = () => {
 };
 
 //重命名
-const handleRename = () => {
-  if (props.data.name == newName.value) {
+const handleRename = (newName: string) => {
+  if (props.data.name == newName) {
     return;
   }
 
-  rename(props.index, newName.value);
+  rename(props.index, newName);
 };
 
 //打开文件

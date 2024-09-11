@@ -1,34 +1,17 @@
 <template>
   <Row label="水平坐标" des="左上角为坐标点的水平坐标">
     <span class="mr-1r fs-14">{{ data.monthX }}</span>
-    <el-slider
-      v-model="data.monthX"
-      :min="0"
-      :max="200"
-      :show-tooltip="false"
-      style="width: 280px"
-    />
+    <el-slider v-model.lazy="data.monthX" :max="400" :show-tooltip="false" />
   </Row>
 
   <Row label="垂直坐标" des="左上角为坐标点的垂直坐标">
     <span class="mr-1r fs-14">{{ data.monthY }}</span>
-    <el-slider
-      v-model="data.monthY"
-      :min="0"
-      :max="200"
-      :show-tooltip="false"
-      style="width: 280px"
-    />
+    <el-slider v-model.lazy="data.monthY" :max="400" :show-tooltip="false" />
   </Row>
 
   <Row label="字体大小" des="时间字体大小">
     <span class="mr-1r fs-14">{{ data.monthSize }}</span>
-    <el-slider
-      v-model="data.monthSize"
-      :min="0"
-      :max="200"
-      :show-tooltip="false"
-    />
+    <el-slider v-model.lazy="data.monthSize" :max="200" :show-tooltip="false" />
   </Row>
 
   <Row label="样式" des="语言样式">

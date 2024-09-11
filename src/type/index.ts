@@ -7,8 +7,9 @@ const eventNames = [
   "update:config",
   "setSize",
   "setPosition",
+  "setVisible",
+  "setEverCenter",
   "center",
-  "show",
   "move",
 ] as const;
 

@@ -4,11 +4,12 @@ import { writeJson, readJson } from "../hooks/useFs";
 
 onMounted(() => {
   const win = createWindow("clock", {
-    x: 3000,
-    y: -100,
-    devTool: true,
+    // x: 3000,
+    // y: -100,
+    // devTool: true,
     transparent: true,
-    resizable: true,
+    resizable: false,
+    skipTaskbar: true,
 
     render: {
       dev: {

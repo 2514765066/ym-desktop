@@ -25,7 +25,7 @@ export const initConfig = (name: ConfigNames, data: Ref<any>) => {
     //监视显示隐藏
     watchEffect(() => {
       const isShow = data.value.show;
-      electron.ipcRenderer.send("show", name, isShow);
+      electron.ipcRenderer.send("setVisible", name, isShow);
     });
   } else {
     electron.ipcRenderer.on("update:config", (_, value: any) => {

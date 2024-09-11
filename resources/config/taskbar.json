@@ -1,18 +1,17 @@
 {
   "show": true,
-  "move": false,
-  "x": 0,
-  "y": 0,
+  "move": true,
   "height": 80,
-  "borderRadius": 19,
+  "borderRadius": 20,
   "paddingX": 20,
   "iconsSize": 48,
-  "iconsGap": 40,
-  "iconsTipPosition": 20,
+  "iconsGap": 32,
+  "backgroundColor": "#fff",
+  "splitColor": "#fff",
+  "iconsTipPosition": 60,
   "iconsTipShow": true,
   "iconsShadow": false,
-  "backgroundColor": "#FFFFFF80",
-  "splitColor": "#FFFFFFFF",
   "removeIconKey": "Delete",
-  "addSplitKey": "Insert"
+  "addSplitKey": "Insert",
+  "center": false
 }

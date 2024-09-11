@@ -4,10 +4,10 @@ import { join } from "path";
 
 onMounted(() => {
   const win = createWindow("manage", {
-    x: 3000,
-    y: -100,
+    // x: 3000,
+    // y: -100,
     // devTool: true,
-
+    show: false,
     render: {
       dev: {
         url: `${process.env["ELECTRON_RENDERER_URL"]}/#/manage`,

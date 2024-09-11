@@ -3,32 +3,36 @@ import { initConfig } from "@/hooks/useConfig";
 
 export const useClockStore = defineStore("clock", () => {
   const data = ref({
-    show: false,
+    show: true,
     move: false,
 
     timeX: 0,
     timeY: 0,
-    timeColor: "",
-    timeSize: 0,
+    timeColor: "#fff",
+    timeSize: 100,
     timeFamily: "",
-    timeStyle: "",
+    timeStyle: "hh:mm",
 
     dayX: 0,
-    dayY: 0,
-    dayColor: "",
-    daySize: 0,
+    dayY: 100,
+    dayColor: "#fff",
+    daySize: 50,
     dayFamily: "",
 
-    monthX: 0,
-    monthY: 0,
-    monthColor: "",
-    monthSize: 0,
+    monthX: 50,
+    monthY: 100,
+    monthColor: "#fff",
+    monthSize: 50,
     monthFamily: "",
-    monthStyle: "",
+    monthStyle: "english",
   });
 
   const get = async () => {
-    data.value = await api.readConfig("clock");
+    const config = await api.readConfig("clock");
+
+    if (config.length == 0) return;
+
+    data.value = config;
   };
 
   initConfig("clock", data);

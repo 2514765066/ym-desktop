@@ -17,13 +17,13 @@ ipcMain.on("maximize", () => {
 //关闭
 ipcMain.on("close", () => {
   const win = windows.get("manage")!;
-  win.close();
+  win.hide();
 });
 
 //鼠标是否穿透窗口
-ipcMain.on("ignoreMouseEvents", ({ sender }, bool: boolean) => {
+ipcMain.on("ignoreMouseEvents", ({ sender }, option: boolean) => {
   const win = fromWebContents(sender);
-  win.setIgnoreMouseEvents(bool, {
+  win.setIgnoreMouseEvents(option, {
     forward: true,
   });
 });
@@ -56,16 +56,49 @@ ipcMain.on("setPosition", (_, name: string, x: number, y: number) => {
   win.setPosition(x, y);
 });
 
-//居中
+//显示隐藏
+ipcMain.on("setVisible", (_, name: string, option: boolean) => {
+  const win = windows.get(name)!;
+
+  if (win.isVisible() && option == false) {
+    win.hide();
+    return;
+  }
+
+  if (!win.isVisible() && option == true) {
+    win.show();
+    return;
+  }
+});
+
+//水平居中
 ipcMain.on("center", (_, name: string, option) => {
   const win = windows.get(name)!;
 
   win.expandCenter(option);
 });
 
-//显示隐藏
-ipcMain.on("show", (_, name: string, isShow: boolean) => {
-  const win = windows.get(name);
+//永久水平居中
+const moveListeners = new Map<string, () => void>();
 
-  isShow ? win?.show() : win?.hide();
+ipcMain.on("setEverCenter", (_, name: string, option: boolean) => {
+  const win = windows.get(name)!;
+
+  if (option && !moveListeners.has(name)) {
+    const moveListener = () => {
+      win.expandCenter({
+        vertical: true,
+      });
+    };
+
+    moveListener();
+    win.on("move", moveListener);
+    moveListeners.set(name, moveListener);
+    return;
+  }
+
+  if (!option && moveListeners.has(name)) {
+    win.removeListener("move", moveListeners.get(name)!);
+    moveListeners.delete(name);
+  }
 });

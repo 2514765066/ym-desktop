@@ -16,9 +16,17 @@ electron.ipcRenderer.on("is:maximize", (_, res: boolean) => {
   isFullScreen.value = res;
 });
 
-//设置窗口位置
-export const handleResetPositon = (name: string, x: number, y: number) => {
-  electron.ipcRenderer.send("setPosition", name, x, y);
+//重置窗口位置
+export const handleResetPositon = (name: string) => {
+  electron.ipcRenderer.send("center", name, {
+    horizontal: true,
+    vertical: true,
+  });
 };
 
-//
+//水平居中
+export const handleCenter = (name: string) => {
+  electron.ipcRenderer.send("center", name, {
+    vertical: true,
+  });
+};

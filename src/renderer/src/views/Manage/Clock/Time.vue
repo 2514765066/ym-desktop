@@ -1,33 +1,17 @@
 <template>
   <Row label="水平坐标" des="左上角为坐标点的水平坐标">
     <span class="mr-1r fs-14">{{ data.timeX }}</span>
-    <el-slider
-      v-model="data.timeX"
-      :min="0"
-      :max="data.timeSize * 2"
-      :show-tooltip="false"
-      style="width: 280px"
-    />
+    <el-slider v-model.lazy="data.timeX" :max="400" :show-tooltip="false" />
   </Row>
 
   <Row label="垂直坐标" des="左上角为坐标点的垂直坐标">
     <span class="mr-1r fs-14">{{ data.timeY }}</span>
-    <el-slider
-      v-model="data.timeY"
-      :min="0"
-      :max="data.timeSize * 2"
-      :show-tooltip="false"
-    />
+    <el-slider v-model.lazy="data.timeY" :max="400" :show-tooltip="false" />
   </Row>
 
   <Row label="字体大小" des="时间字体大小">
     <span class="mr-1r fs-14">{{ data.timeSize }}</span>
-    <el-slider
-      v-model="data.timeSize"
-      :min="0"
-      :max="200"
-      :show-tooltip="false"
-    />
+    <el-slider v-model.lazy="data.timeSize" :max="200" :show-tooltip="false" />
   </Row>
 
   <Row label="样式" des="hh时mm分">

@@ -32,14 +32,14 @@
     "vue-draggable-plus": "^0.4.0",
     "vue-router": "^4.3.0",
     "vue-tsc": "^1.8.27",
-    "ym-easy.css": "^1.0.10",
-    "ym-electron.js": "^1.0.5"
+    "ym-easy.css": "^1.0.10"
   },
   "volta": {
     "node": "18.18.2"
   },
   "dependencies": {
     "extract-file-icon": "^0.3.2",
-    "nanoid": "^5.0.7"
+    "nanoid": "^5.0.7",
+    "ym-electron.js": "^1.0.5"
   }
 }

@@ -1,22 +1,27 @@
 <template>
   <Row label="水平坐标" des="左上角为坐标点的水平坐标">
     <span class="mr-1r fs-14">{{ data.dayX }}</span>
-    <el-slider v-model="data.dayX" :min="0" :max="200" :show-tooltip="false" />
+    <el-slider
+      v-model.lazy="data.dayX"
+      :min="0"
+      :max="400"
+      :show-tooltip="false"
+    />
   </Row>
 
   <Row label="垂直坐标" des="左上角为坐标点的垂直坐标">
     <span class="mr-1r fs-14">{{ data.dayY }}</span>
-    <el-slider v-model="data.dayY" :min="0" :max="200" :show-tooltip="false" />
+    <el-slider
+      v-model.lazy="data.dayY"
+      :min="0"
+      :max="400"
+      :show-tooltip="false"
+    />
   </Row>
 
   <Row label="字体大小" des="日期字体大小">
     <span class="mr-1r fs-14">{{ data.daySize }}</span>
-    <el-slider
-      v-model="data.daySize"
-      :min="0"
-      :max="200"
-      :show-tooltip="false"
-    />
+    <el-slider v-model.lazy="data.daySize" :max="200" :show-tooltip="false" />
   </Row>
 
   <Row label="字体" des="日期字体">

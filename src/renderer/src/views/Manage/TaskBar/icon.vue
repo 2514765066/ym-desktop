@@ -12,31 +12,25 @@
   <Row label="名称位置" des="鼠标悬浮在图标上显示名称的垂直位置">
     <span class="mr-1r fs-14">{{ data.iconsTipPosition }}</span>
     <el-slider
-      v-model="data.iconsTipPosition"
-      :max="data.height / 2"
+      v-model.lazy="data.iconsTipPosition"
+      :max="data.height"
       :show-tooltip="false"
-      style="width: 280px"
     />
   </Row>
 
   <Row label="大小" des="图标大小">
     <span class="mr-1r fs-14">{{ data.iconsSize - 8 }}</span>
     <el-slider
-      v-model="data.iconsSize"
+      v-model.lazy="data.iconsSize"
       :min="8"
       :max="data.height + 8"
       :show-tooltip="false"
-      style="width: 280px"
     />
   </Row>
 
   <Row label="间距" des="图标之间的间距">
     <span class="mr-1r fs-14">{{ data.iconsGap }}</span>
-    <el-slider
-      v-model="data.iconsGap"
-      :show-tooltip="false"
-      style="width: 280px"
-    />
+    <el-slider v-model.lazy="data.iconsGap" :show-tooltip="false" />
   </Row>
 </template>
 
