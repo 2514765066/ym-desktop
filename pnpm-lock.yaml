@@ -14,9 +14,6 @@ importers:
       nanoid:
         specifier: ^5.0.7
         version: 5.0.7
-      ym-electron.js:
-        specifier: ^1.0.5
-        version: 1.0.5
     devDependencies:
       '@electron-toolkit/preload':
         specifier: ^3.0.0
@@ -78,6 +75,9 @@ importers:
       ym-easy.css:
         specifier: ^1.0.10
         version: 1.0.10
+      ym-electron.js:
+        specifier: ^2.0.0
+        version: 2.0.0
 
 packages:
 
@@ -2176,8 +2176,8 @@ packages:
   ym-easy.css@1.0.10:
     resolution: {integrity: sha512-7CHtiJ/w9Woc8kaU/ixJMaR7ApFgp5ITh87qmh0KsHLNjFJyJTDCkbeAnfRmStjD86swZ2WHp+pycnp0wwArwA==}
 
-  ym-electron.js@1.0.5:
-    resolution: {integrity: sha512-e5x/OxFOY3YC+yvF818IxjTknLYFGRkTn3o6Sf+Fmb/WszUdOrHOtLdvqS/XbTEAhWwKrWYKWDVP/z7Av2WGEQ==}
+  ym-electron.js@2.0.0:
+    resolution: {integrity: sha512-8Sbp/IXU2MKsCnHaNwiPQ0sapKrRUzJkDMOtXwSS/3+Fh8BFaDeMj4HZWvC4QDp0e2HY76c08vhpZvazinJgpQ==}
 
   zip-stream@4.1.1:
     resolution: {integrity: sha512-9qv4rlDiopXg4E69k+vMHjNN63YFMe9sZMrdlvKnCjlCRWeCBswPPMPUfx+ipsAWq1LXHe70RcbaHdJJpS6hyQ==}
@@ -4367,7 +4367,7 @@ snapshots:
 
   ym-easy.css@1.0.10: {}
 
-  ym-electron.js@1.0.5:
+  ym-electron.js@2.0.0:
     dependencies:
       electron: 29.4.6
     transitivePeerDependencies:

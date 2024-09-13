@@ -6,6 +6,7 @@ import { debounce } from "../hooks/useDebounce";
 onMounted(() => {
   const win = createWindow("taskbar", {
     // devTool: true,
+    frame: false,
     transparent: true,
     resizable: false,
     skipTaskbar: true,
@@ -18,6 +19,10 @@ onMounted(() => {
         hash: "taskbar",
         path: join(__dirname, "../renderer/index.html"),
       },
+    },
+    webPreferences: {
+      preload: join(__dirname, "../preload/index.mjs"),
+      sandbox: false,
     },
   });
 

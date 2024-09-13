@@ -87,7 +87,7 @@ ipcMain.on("setEverCenter", (_, name: string, option: boolean) => {
   if (option && !moveListeners.has(name)) {
     const moveListener = () => {
       win.expandCenter({
-        vertical: true,
+        horizontal: true,
       });
     };
 

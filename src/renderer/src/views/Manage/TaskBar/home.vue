@@ -43,7 +43,7 @@
     to="/manage/taskbar/shortcut"
   ></Row>
 
-  <Row label="重置位置" des="重置任务栏到屏幕最左上角">
+  <Row label="重置位置" des="重置任务栏到屏幕中心">
     <Button @click="handleResetPositon('taskbar')">重置</Button>
   </Row>
 </template>

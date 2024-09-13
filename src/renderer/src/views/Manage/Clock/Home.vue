@@ -27,8 +27,8 @@
     to="/manage/clock/month"
   ></Row>
 
-  <Row label="重置位置" des="重置时钟到屏幕最左上角">
-    <Button @click="handleResetPositon('clock', 0, 0)">重置</Button>
+  <Row label="重置位置" des="重置时钟到屏幕中心">
+    <Button @click="handleResetPositon('clock')">重置</Button>
   </Row>
 </template>
 

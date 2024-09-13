@@ -1,29 +1,20 @@
 import {
-  setGlobalCreateWindowOption,
-  app,
   onMounted,
   createTray,
   windows,
+  isSecondeInstanceStart,
+  autoStart,
 } from "ym-electron.js";
+import { app } from "electron";
 import { icon } from "../hooks/usePath";
-import { join } from "node:path";
 import "../hooks/ipc";
 import "./manage";
 import "./taskbar";
 import "./clock";
 
-if (app.isSecondeInstanceStart) {
+if (isSecondeInstanceStart()) {
   app.exit();
 }
-
-setGlobalCreateWindowOption({
-  frame: false,
-
-  webPreferences: {
-    preload: join(__dirname, "../preload/index.mjs"),
-    sandbox: false,
-  },
-});
 
 onMounted(() => {
   const tray = createTray({
@@ -46,4 +37,4 @@ onMounted(() => {
   });
 });
 
-app.isAutoStart = true;
+autoStart();

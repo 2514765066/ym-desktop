@@ -13,5 +13,5 @@
   "iconsShadow": false,
   "removeIconKey": "Delete",
   "addSplitKey": "Insert",
-  "center": false
+  "center": true
 }

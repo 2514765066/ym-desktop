@@ -27,6 +27,6 @@ export const handleResetPositon = (name: string) => {
 //水平居中
 export const handleCenter = (name: string) => {
   electron.ipcRenderer.send("center", name, {
-    vertical: true,
+    horizontal: true,
   });
 };
