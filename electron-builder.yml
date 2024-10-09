@@ -12,8 +12,9 @@ files:
 asar: false
 win:
   executableName: ym-desktop
-  target: zip
 nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
@@ -23,3 +24,4 @@ publish:
   provider: github
   owner: 2514765066,
   repo: ym-desktop
+  releaseType: release

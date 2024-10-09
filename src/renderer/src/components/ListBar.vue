@@ -21,8 +21,12 @@ const list = [
     to: "/manage/taskbar",
   },
   {
-    label: "时钟",
+    label: "桌面时钟",
     to: "/manage/clock",
+  },
+  {
+    label: "可视化音频",
+    to: "/manage/music",
   },
 ];
 </script>

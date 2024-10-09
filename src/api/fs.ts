@@ -1,6 +1,6 @@
 import { writeFile, readFile } from "fs/promises";
 import { existsSync } from "fs";
-import { config } from "../hooks/usePath";
+import { resources } from "../api/path";
 import { join } from "path";
 
 /**
@@ -9,7 +9,7 @@ import { join } from "path";
  * @param data 数据
  */
 export const writeJson = async (name: string, data: any) => {
-  const path = join(config, `${name}.json`);
+  const path = join(resources, `${name}.json`);
 
   await writeFile(path, JSON.stringify(data, null, 2));
 };
@@ -20,7 +20,7 @@ export const writeJson = async (name: string, data: any) => {
  * @returns 文件内容
  */
 export const readJson = async (name: string) => {
-  const path = join(config, `${name}.json`);
+  const path = join(resources, `${name}.json`);
 
   if (!existsSync(path)) {
     return [];

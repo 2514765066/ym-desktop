@@ -6,11 +6,13 @@ import {
   autoStart,
 } from "ym-electron.js";
 import { app } from "electron";
-import { icon } from "../hooks/usePath";
-import "../hooks/ipc";
+import { icon } from "../api/path";
+import "../api/ipc";
 import "./manage";
 import "./taskbar";
 import "./clock";
+import "./music";
+import "../api/updater";
 
 if (isSecondeInstanceStart()) {
   app.exit();

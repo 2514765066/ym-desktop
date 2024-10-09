@@ -13,7 +13,7 @@ export const useIconsStore = defineStore("icons", () => {
 
   //获取配置
   const get = async () => {
-    const config = await api.readConfig("icons");
+    const config = await electron.ipcRenderer.invoke("readConfig", "icons");
 
     if (config.length == 0) return;
 
@@ -68,7 +68,11 @@ export const useIconsStore = defineStore("icons", () => {
   watch(
     data,
     val => {
-      api.writeConfig("icons", JSON.parse(JSON.stringify(val)));
+      electron.ipcRenderer.invoke(
+        "writeConfig",
+        "icons",
+        JSON.parse(JSON.stringify(val))
+      );
     },
     {
       deep: true,

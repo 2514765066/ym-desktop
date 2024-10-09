@@ -16,15 +16,6 @@
     <el-switch v-model="data.move" />
   </Row>
 
-  <Row label="永久水平居中" des="任务栏永远位于水平屏幕中间">
-    <span class="fs-14 mr-1r">{{ data.center ? "开" : "关" }}</span>
-    <el-switch v-model="data.center" />
-  </Row>
-
-  <Row label="水平居中" des="让任务栏水平居中" v-if="!data.center">
-    <Button @click="handleCenter('taskbar')">水平居中</Button>
-  </Row>
-
   <Row
     label="个性化"
     des="任务栏高度，圆角，背景色"
@@ -44,13 +35,13 @@
   ></Row>
 
   <Row label="重置位置" des="重置任务栏到屏幕中心">
-    <Button @click="handleResetPositon('taskbar')">重置</Button>
+    <MyButton @click="handleResetPositon('taskbar')">重置</MyButton>
   </Row>
 </template>
 
 <script setup lang="ts">
-import { handleResetPositon, handleCenter } from "@/hooks/useControls";
-import Button from "@/components/Button.vue";
+import { handleResetPositon } from "@/hooks/useControls";
+import MyButton from "@/components/MyButton.vue";
 import { ElSwitch, ElAlert } from "element-plus";
 import Row from "@/components/Row.vue";
 import { useTaskbarStore } from "@/stores/useTaskbarStore";

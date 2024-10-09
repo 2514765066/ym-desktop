@@ -1,42 +1,23 @@
 <template>
-  <section class="v-n-c">
-    <img src="@/assets/icon.png" width="20px" />
-    <span class="c-ccc ml-2 fs-18">ym-desktop</span>
+  <section class="TitleBar v-n-c">
+    <Logo />
 
-    <aside class="v-n-c h-100 ml">
-      <div class="h-100 v-c-c click" @click="minimize">
-        <img src="@/assets/minimize.svg" />
-      </div>
-
-      <div class="v-c-c click h-100" @click="maximize">
-        <img src="@/assets/restore.svg" v-if="isFullScreen" />
-        <img src="@/assets/maximize.svg" v-else />
-      </div>
-
-      <div class="h-100 v-c-c click" @click="close">
-        <img src="@/assets/close.svg" />
-      </div>
-    </aside>
+    <Control class="ml" />
   </section>
 </template>
 
 <script setup lang="ts">
-// import { ElTooltip } from "element-plus";
-// import eventEmitter from "@/hooks/eventEmitter";
-import { close, maximize, minimize, isFullScreen } from "@/hooks/useControls";
+import Logo from "./Logo.vue";
+import Control from "./Control.vue";
 </script>
 
 <style scoped lang="scss">
-section {
+.TitleBar {
   grid-area: TitleBar;
   $hoverBg: #373737;
   padding-left: 0.5rem;
   height: 38px;
   -webkit-app-region: drag;
-
-  > span {
-    font-family: logo;
-  }
 
   > div {
     width: 600px;

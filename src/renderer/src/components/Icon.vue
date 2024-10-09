@@ -17,7 +17,7 @@
       :visible="visible"
       :max="10"
       @blur="handleRename"
-    ></icon-tip>
+    />
   </section>
 </template>
 

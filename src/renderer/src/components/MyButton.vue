@@ -1,5 +1,5 @@
 <template>
-  <button>
+  <button class="MyButton">
     <slot></slot>
   </button>
 </template>
@@ -7,7 +7,7 @@
 <script setup lang="ts"></script>
 
 <style scoped lang="scss">
-button {
+.MyButton {
   background-color: #373737;
   padding: 0.3rem 2.2rem;
   border-radius: 5px;

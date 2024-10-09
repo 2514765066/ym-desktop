@@ -28,7 +28,7 @@ export const useClockStore = defineStore("clock", () => {
   });
 
   const get = async () => {
-    const config = await api.readConfig("clock");
+    const config = await electron.ipcRenderer.invoke("readConfig", "clock");
 
     if (config.length == 0) return;
 

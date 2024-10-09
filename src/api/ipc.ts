@@ -1,6 +1,7 @@
 import { windows, fromWebContents } from "ym-electron.js";
-import { ipcMain } from "./useIpcMain";
+import { ipcMain } from "./ipcMain";
 import { EventNames } from "../type";
+import { readJson, writeJson } from "../api/fs";
 
 //最小化
 ipcMain.on("minimize", () => {
@@ -29,15 +30,15 @@ ipcMain.on("ignoreMouseEvents", ({ sender }, option: boolean) => {
 });
 
 //更新配置
-ipcMain.on("update:config", (_, name: string, data: any) => {
+ipcMain.on("updateConfig", (_, name: string, data: any) => {
   const win = windows.get(name)!;
 
-  win.webContents.send<EventNames>("update:config", data);
+  win.webContents.send<EventNames>("updateConfig", data);
 });
 
 //修改宽高
-ipcMain.on("setSize", ({ sender }, width: number, height: number) => {
-  const win = fromWebContents(sender);
+ipcMain.on("setSize", (_, name: string, width: number, height: number) => {
+  const win = windows.get(name)!;
 
   if (!win.resizable) {
     win.setResizable(true);
@@ -47,13 +48,6 @@ ipcMain.on("setSize", ({ sender }, width: number, height: number) => {
   }
 
   win.setSize(width, height);
-});
-
-//修改位置
-ipcMain.on("setPosition", (_, name: string, x: number, y: number) => {
-  const win = windows.get(name)!;
-
-  win.setPosition(x, y);
 });
 
 //显示隐藏
@@ -74,31 +68,16 @@ ipcMain.on("setVisible", (_, name: string, option: boolean) => {
 //水平居中
 ipcMain.on("center", (_, name: string, option) => {
   const win = windows.get(name)!;
-
   win.expandCenter(option);
 });
 
-//永久水平居中
-const moveListeners = new Map<string, () => void>();
+//读取配置
+ipcMain.handle("readConfig", async (_, name: string) => {
+  return await readJson(name);
+});
 
-ipcMain.on("setEverCenter", (_, name: string, option: boolean) => {
-  const win = windows.get(name)!;
-
-  if (option && !moveListeners.has(name)) {
-    const moveListener = () => {
-      win.expandCenter({
-        horizontal: true,
-      });
-    };
-
-    moveListener();
-    win.on("move", moveListener);
-    moveListeners.set(name, moveListener);
-    return;
-  }
-
-  if (!option && moveListeners.has(name)) {
-    win.removeListener("move", moveListeners.get(name)!);
-    moveListeners.delete(name);
-  }
+//写入配置
+ipcMain.handle("writeConfig", async (_, name: string, data: any) => {
+  await writeJson(name, data);
+  return true;
 });

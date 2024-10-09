@@ -6,7 +6,6 @@ export const useTaskbarStore = defineStore("taskbar", () => {
   const data = ref({
     show: true,
     move: false,
-    center: true,
     height: 80,
     borderRadius: 20,
     paddingX: 20,
@@ -22,7 +21,7 @@ export const useTaskbarStore = defineStore("taskbar", () => {
   });
 
   const get = async () => {
-    const config = await api.readConfig("taskbar");
+    const config = await electron.ipcRenderer.invoke("readConfig", "taskbar");
 
     if (config.length == 0) return;
 
@@ -31,11 +30,6 @@ export const useTaskbarStore = defineStore("taskbar", () => {
 
   initConfig("taskbar", data);
   get();
-
-  //永久水平居中
-  watchEffect(() => {
-    electron.ipcRenderer.send("setEverCenter", "taskbar", data.value.center);
-  });
 
   return {
     data,

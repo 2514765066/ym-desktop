@@ -1,8 +1,7 @@
 import { contextBridge, ipcRenderer, shell } from "electron";
 import { electronAPI } from "@electron-toolkit/preload";
-import { EventNames, ConfigNames } from "../type";
+import { EventNames } from "../type";
 import getFileIcon from "extract-file-icon";
-import { writeJson, readJson } from "../hooks/useFs";
 
 const api = {
   //最小化
@@ -21,16 +20,6 @@ const api = {
   close() {
     // @ts-ignore
     ipcRenderer.send<EventNames>("close");
-  },
-
-  //读取配置
-  async readConfig(name: ConfigNames) {
-    return await readJson(name);
-  },
-
-  //写入配置
-  async writeConfig(name: ConfigNames, data: any) {
-    writeJson(name, data);
   },
 
   //获取图标

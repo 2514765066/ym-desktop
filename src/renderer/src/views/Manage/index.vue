@@ -1,5 +1,5 @@
 <template>
-  <div class="wh-100 manage">
+  <div class="wh-100 Manage">
     <title-bar></title-bar>
 
     <list-bar></list-bar>
@@ -19,7 +19,7 @@ import ListBar from "@/components/ListBar.vue";
 </script>
 
 <style lang="scss">
-.manage {
+.Manage {
   background-color: #191919;
   gap: 5px;
   display: grid;
@@ -49,7 +49,7 @@ import ListBar from "@/components/ListBar.vue";
     }
 
     .el-color-picker {
-      width: 100px;
+      width: 35px;
       height: 35px;
 
       .el-color-picker__trigger {

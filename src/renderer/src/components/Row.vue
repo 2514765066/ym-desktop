@@ -2,7 +2,7 @@
   <Transition enter-active-class="fadeInRight" appear>
     <router-link v-if="to" :to="to" class="row v-n-c f-s-0" draggable="false">
       <slot name="icon">
-        <img src="@/assets/restore.svg" width="20" />
+        <img src="@/assets/svg/restore.svg" width="20" />
       </slot>
 
       <div class="ml-1r mr h-n-c g-1">
@@ -10,12 +10,12 @@
         <span class="c-ccc fs-12 l-h-12">{{ des }}</span>
       </div>
 
-      <img src="@/assets/arrowRight.svg" width="20" />
+      <img src="@/assets/svg/arrowRight.svg" width="20" />
     </router-link>
 
     <section class="row v-n-c f-s-0" v-else>
       <slot name="icon">
-        <img src="@/assets/restore.svg" width="20" />
+        <img src="@/assets/svg/restore.svg" width="20" />
       </slot>
 
       <div class="ml-1r mr h-n-c g-1">

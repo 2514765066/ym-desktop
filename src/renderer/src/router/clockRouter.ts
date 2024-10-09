@@ -2,7 +2,7 @@ import { RouteRecordRaw } from "vue-router";
 
 export default {
   path: "clock",
-  component: () => import("@/views/Manage/Clock/index.vue"),
+  component: () => import("@/views/Manage/Clock/Index.vue"),
   children: [
     {
       path: "",

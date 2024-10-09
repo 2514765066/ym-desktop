@@ -1,5 +1,5 @@
 <template>
-  <el-select v-model="model" filterable>
+  <el-select v-model="model" filterable placeholder="请选择字体">
     <el-option v-for="item in data" :key="item" :label="item" :value="item">
       <div class="wh-100 v-n-c">
         <span class="fs-20" :style="{ fontFamily: item }">05:20</span>

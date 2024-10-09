@@ -1,9 +1,11 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import clockRouter from "./clockRouter";
 import taskbarRouter from "./taskbarRouter";
-import ManageView from "@/views/Manage/index.vue";
-import TaskbarView from "@/views/Taskbar/index.vue";
-import ClockView from "@/views/Clock/index.vue";
+import musicRouter from "./musicRouter";
+import ManageView from "@/views/Manage/Index.vue";
+import TaskbarView from "@/views/Taskbar/Index.vue";
+import ClockView from "@/views/Clock/Index.vue";
+import MusicView from "@/views/Music/Index.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -18,6 +20,7 @@ const router = createRouter({
         },
         taskbarRouter,
         clockRouter,
+        musicRouter,
       ],
     },
     {
@@ -27,6 +30,10 @@ const router = createRouter({
     {
       path: "/clock",
       component: ClockView,
+    },
+    {
+      path: "/music",
+      component: MusicView,
     },
   ],
 });

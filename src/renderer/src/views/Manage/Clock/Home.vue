@@ -1,10 +1,10 @@
 <template>
-  <Row label="显示" des="任务栏是否显示">
+  <Row label="显示" des="时钟是否显示">
     <span class="fs-14 mr-1r">{{ data.show ? "开" : "关" }}</span>
     <el-switch v-model="data.show" />
   </Row>
 
-  <Row label="移动" des="任务栏是否可以拖动">
+  <Row label="移动" des="时钟是否可以拖动">
     <span class="fs-14 mr-1r">{{ data.move ? "开" : "关" }}</span>
     <el-switch v-model="data.move" />
   </Row>
@@ -28,12 +28,12 @@
   ></Row>
 
   <Row label="重置位置" des="重置时钟到屏幕中心">
-    <Button @click="handleResetPositon('clock')">重置</Button>
+    <MyButton @click="handleResetPositon('clock')">重置</MyButton>
   </Row>
 </template>
 
 <script setup lang="ts">
-import Button from "@/components/Button.vue";
+import MyButton from "@/components/MyButton.vue";
 import { ElSwitch } from "element-plus";
 import Row from "@/components/Row.vue";
 import { useClockStore } from "@/stores/useClockStore";

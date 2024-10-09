@@ -1,5 +1,5 @@
 <template>
-  <main class="wh-100 p-r">
+  <main class="Clock wh-100 p-r">
     <span class="p-a" ref="elTime">{{ time }}</span>
     <span class="p-a" ref="elDay">{{ nowDate.day }}</span>
     <span class="p-a" ref="elMonth">{{ month }}</span>
@@ -35,7 +35,7 @@ watch(
         elMonth.value!
       );
 
-      electron.ipcRenderer.send("setSize", width + 20, height + 20);
+      electron.ipcRenderer.send("setSize", "clock", width + 20, height + 20);
     });
   },
   {
@@ -50,14 +50,8 @@ watchEffect(() => {
 </script>
 
 <style lang="scss">
-#app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-main {
-  --move: v-bind("data.move? 'drag':'no-drag'");
+.Clock {
+  --move: v-bind("data.move?'drag':'no-drag'");
   --timeX: calc(v-bind("data.timeX") * 1px);
   --timeY: calc(v-bind("data.timeY + data.timeSize/2") * 1px);
   --timeSize: calc(v-bind("data.timeSize") * 1px);

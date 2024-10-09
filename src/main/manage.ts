@@ -38,5 +38,6 @@ onMounted(() => {
   //解决窗口拖动跟忽略鼠标事件的bug
   win.on("move", () => {
     windows.get("taskbar")!.setIgnoreMouseEvents(false);
+    windows.get("clock")!.setIgnoreMouseEvents(false);
   });
 });

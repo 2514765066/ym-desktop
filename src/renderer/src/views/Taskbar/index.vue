@@ -1,5 +1,5 @@
 <template>
-  <main class="p-2">
+  <main class="Taskbar p-2">
     <vue-draggable
       v-model="icons.data"
       class="v-c-c"
@@ -50,18 +50,19 @@ const handleDragover = (event: DragEvent) => {
 
 //监视动态设置宽高
 watchEffect(() => {
-  const width =
-    icons.data.length == 0
-      ? data.value.paddingX * 2 + 20
-      : 20 +
-        icons.data.length * data.value.iconsSize +
-        (icons.data.length - 1) * data.value.iconsGap +
-        data.value.paddingX * 2 +
-        4;
+  let width =
+    data.value.paddingX * 2 + 50 + icons.data.length * data.value.iconsSize;
+
+  if (icons.data.length != 0) {
+    width += (icons.data.length - 1) * data.value.iconsGap;
+  }
 
   const height = data.value.height * 3;
 
-  electron.ipcRenderer.send("setSize", width, height);
+  electron.ipcRenderer.send("setSize", "taskbar", width, height);
+  electron.ipcRenderer.send("center", "taskbar", {
+    horizontal: true,
+  });
 });
 
 //鼠标穿透
@@ -81,7 +82,7 @@ onMounted(() => {
   align-items: center;
 }
 
-main {
+.Taskbar {
   > div {
     --move: v-bind("data.move? 'drag':'no-drag'");
     --height: calc(v-bind("data.height") * 1px);

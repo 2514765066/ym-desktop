@@ -5,7 +5,7 @@
         {{ homeRoute.meta.label }}
       </router-link>
 
-      <img src="@/assets/arrowRight.svg" width="22" v-show="!inHome" />
+      <img src="@/assets/svg/arrowRight.svg" width="22" v-show="!inHome" />
 
       <span v-show="!inHome" :class="{ active: !inHome }">
         {{ route.meta.label }}

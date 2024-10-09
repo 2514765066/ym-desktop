@@ -1,9 +1,9 @@
 import { join } from "path";
 import { createWindow, onMounted } from "ym-electron.js";
-import { writeJson, readJson } from "../hooks/useFs";
+import { usePosition } from "../api/position";
 
 onMounted(() => {
-  const win = createWindow("clock", {
+  createWindow("clock", {
     // x: 3000,
     // y: -100,
     // devTool: true,
@@ -28,14 +28,5 @@ onMounted(() => {
     },
   });
 
-  win.on("moved", () => {
-    const position = win.getPosition();
-
-    writeJson("clockPos", position);
-  });
-
-  (async () => {
-    const [x = 0, y = 0] = await readJson("clockPos");
-    win.setPosition(x, y);
-  })();
+  usePosition("clock");
 });

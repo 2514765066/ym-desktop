@@ -3,18 +3,23 @@ const eventNames = [
   "close",
   "maximize",
   "is:maximize",
-  "ignoreMouseEvents",
-  "update:config",
-  "setSize",
-  "setPosition",
-  "setVisible",
-  "setEverCenter",
-  "center",
-  "move",
-] as const;
 
-export type PositionNames = "taskbarPos" | "clockPos";
-export type ConfigNames = "taskbar" | "clock" | "icons";
+  "ignoreMouseEvents",
+  "updateConfig",
+  "setSize",
+  "setVisible",
+  "center",
+  "readConfig",
+  "writeConfig",
+
+  "update-available",
+  "update-error",
+  "download-progress",
+  "autoUpdate",
+  "manualUpdate",
+
+  "msg",
+] as const;
 
 export type EventNames = (typeof eventNames)[number];
 

@@ -10,10 +10,13 @@
   </Row>
 
   <Row label="名称位置" des="鼠标悬浮在图标上显示名称的垂直位置">
-    <span class="mr-1r fs-14">{{ data.iconsTipPosition }}</span>
+    <span class="mr-1r fs-14">
+      {{ data.iconsTipPosition - data.iconsSize }}
+    </span>
     <el-slider
       v-model.lazy="data.iconsTipPosition"
-      :max="data.height"
+      :min="data.iconsSize"
+      :max="data.height * 1"
       :show-tooltip="false"
     />
   </Row>
