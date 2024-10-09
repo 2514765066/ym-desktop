@@ -22,6 +22,6 @@ nsis:
 npmRebuild: false
 publish:
   provider: github
-  owner: 2514765066,
+  owner: 2514765066
   repo: ym-desktop
   releaseType: release

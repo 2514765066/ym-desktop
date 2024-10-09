@@ -9,9 +9,9 @@ import { app } from "electron";
 import { icon } from "../api/path";
 import "../api/ipc";
 import "./manage";
-import "./taskbar";
 import "./clock";
 import "./music";
+import "./taskbar";
 import "../api/updater";
 
 if (isSecondeInstanceStart()) {
