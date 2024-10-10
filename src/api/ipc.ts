@@ -3,6 +3,7 @@ import { ipcMain } from "./ipcMain";
 import { EventNames } from "../type";
 import { readJson, writeJson } from "../api/fs";
 import { execSync } from "child_process";
+import { shell } from "electron";
 
 //最小化
 ipcMain.on("minimize", () => {
@@ -96,4 +97,9 @@ ipcMain.handle("shortcutTarget", (_, path: string) => {
   const output = execSync(command).toString();
 
   return output.split("\n")[1].trim();
+});
+
+//打开网页
+ipcMain.on("openURL", (_, url: string) => {
+  shell.openExternal(url);
 });

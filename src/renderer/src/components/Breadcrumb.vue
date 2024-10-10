@@ -30,7 +30,7 @@ const homeRoute = computed(() => {
 });
 
 const inHome = computed(() => {
-  return route.meta.label == "主页";
+  return route.meta.label == homeRoute.value.meta.label;
 });
 </script>
 

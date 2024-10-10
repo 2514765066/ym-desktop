@@ -7,6 +7,10 @@
       :max="20"
       :show-tooltip="false"
     />
+
+    <template #icon>
+      <img src="@/assets/svg/Width.svg" width="25" />
+    </template>
   </Row>
 
   <Row label="间距" des="音乐条的间距">
@@ -17,6 +21,10 @@
       :max="20"
       :show-tooltip="false"
     />
+
+    <template #icon>
+      <img src="@/assets/svg/Padding.svg" width="25" />
+    </template>
   </Row>
 
   <Row label="数量" des="音乐条数量">
@@ -27,6 +35,10 @@
       :max="130"
       :show-tooltip="false"
     />
+
+    <template #icon>
+      <img src="@/assets/svg/Count.svg" width="25" />
+    </template>
   </Row>
 
   <Row label="颜色" des="音乐条颜色">
@@ -37,6 +49,10 @@
       popper-class="el-color-picker-dropdown"
       @active-change="val => (data.barColor = val!)"
     />
+
+    <template #icon>
+      <img src="@/assets/svg/Color.svg" width="25" />
+    </template>
   </Row>
 </template>
 

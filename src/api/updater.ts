@@ -1,37 +1,15 @@
 import { autoUpdater } from "electron-updater";
-import { onMounted, windows } from "ym-electron.js";
-import { dialog, shell } from "electron";
-import { ipcMain } from "./ipcMain";
+import { onMounted } from "ym-electron.js";
+import { dialog } from "electron";
 
 onMounted(() => {
   autoUpdater.checkForUpdates();
   autoUpdater.autoDownload = false;
   autoUpdater.autoInstallOnAppQuit = true;
 
-  //自动更新
-  ipcMain.on("autoUpdate", () => {
-    autoUpdater.downloadUpdate();
-  });
-
-  //手动更新
-  ipcMain.on("manualUpdate", () => {
-    shell.openExternal("https://github.com/2514765066/ym-desktop/releases");
-  });
-
   //有新的更新
   autoUpdater.on("update-available", () => {
-    windows.get("manage")?.webContents.send("update-available");
-  });
-
-  //更新错误
-  autoUpdater.on("error", () => {
-    windows.get("manage")?.webContents.send("update-error");
-  });
-
-  // 下载进度
-  autoUpdater.on("download-progress", ({ percent }) => {
-    windows.get("manage")?.webContents.send("msg", percent);
-    windows.get("manage")?.webContents.send("download-progress", percent);
+    autoUpdater.downloadUpdate();
   });
 
   // 处理下载完成的情况

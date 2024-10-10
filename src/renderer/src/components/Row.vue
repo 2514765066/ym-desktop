@@ -48,7 +48,7 @@ a.row {
 .row {
   padding: 0 1rem;
   height: 65px;
-  background-color: #2d2d2d;
+  background-color: #2b2b2b;
   border-radius: 0.3rem;
 }
 </style>

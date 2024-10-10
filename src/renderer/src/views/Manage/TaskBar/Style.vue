@@ -7,6 +7,10 @@
       :max="150"
       :show-tooltip="false"
     />
+
+    <template #icon>
+      <img src="@/assets/svg/Height.svg" width="25" />
+    </template>
   </Row>
 
   <Row label="圆角" des="任务栏圆角">
@@ -16,11 +20,19 @@
       :max="data.height / 2"
       :show-tooltip="false"
     />
+
+    <template #icon>
+      <img src="@/assets/svg/Radius.svg" width="25" />
+    </template>
   </Row>
 
   <Row label="内边距" des="任务栏两端内边距">
     <span class="mr-1r fs-14">{{ data.paddingX }}</span>
     <el-slider v-model.lazy="data.paddingX" :show-tooltip="false" />
+
+    <template #icon>
+      <img src="@/assets/svg/Padding.svg" width="25" />
+    </template>
   </Row>
 
   <Row label="背景颜色" des="任务栏背景颜色">
@@ -31,6 +43,10 @@
       popper-class="el-color-picker-dropdown"
       @active-change="val => (data.backgroundColor = val!)"
     />
+
+    <template #icon>
+      <img src="@/assets/svg/Color.svg" width="25" />
+    </template>
   </Row>
 
   <Row label="分割线颜色" des="任务栏中分割线颜色">
@@ -41,6 +57,10 @@
       popper-class="el-color-picker-dropdown"
       @active-change="val => (data.splitColor = val!)"
     />
+
+    <template #icon>
+      <img src="@/assets/svg/Color.svg" width="25" />
+    </template>
   </Row>
 </template>
 

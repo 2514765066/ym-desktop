@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import clockRouter from "./clockRouter";
 import taskbarRouter from "./taskbarRouter";
 import musicRouter from "./musicRouter";
+import aboutRouter from "./aboutRouter";
 import ManageView from "@/views/Manage/Index.vue";
 import TaskbarView from "@/views/Taskbar/Index.vue";
 import ClockView from "@/views/Clock/Index.vue";
@@ -18,6 +19,7 @@ const router = createRouter({
           path: "",
           redirect: "/manage/taskbar",
         },
+        aboutRouter,
         taskbarRouter,
         clockRouter,
         musicRouter,

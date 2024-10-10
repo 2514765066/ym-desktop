@@ -12,7 +12,7 @@ export default {
       path: "home",
       component: () => import("@/views/Manage/TaskBar/Home.vue"),
       meta: {
-        label: "主页",
+        label: "任务栏",
       },
     },
     {

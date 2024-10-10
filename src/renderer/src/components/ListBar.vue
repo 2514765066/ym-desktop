@@ -28,6 +28,10 @@ const list = [
     label: "可视化音频",
     to: "/manage/music",
   },
+  {
+    label: "关于",
+    to: "/manage/about",
+  },
 ];
 </script>
 

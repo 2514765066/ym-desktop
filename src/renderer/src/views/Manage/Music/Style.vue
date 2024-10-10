@@ -7,6 +7,10 @@
       :max="256"
       :show-tooltip="false"
     />
+
+    <template #icon>
+      <img src="@/assets/svg/Height.svg" width="25" />
+    </template>
   </Row>
 </template>
 

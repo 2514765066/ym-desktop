@@ -12,7 +12,7 @@ export default {
       path: "home",
       component: () => import("@/views/Manage/Music/Home.vue"),
       meta: {
-        label: "主页",
+        label: "可视化音频",
       },
     },
     {

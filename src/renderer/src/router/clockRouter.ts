@@ -12,7 +12,7 @@ export default {
       path: "home",
       component: () => import("@/views/Manage/Clock/Home.vue"),
       meta: {
-        label: "主页",
+        label: "桌面时钟",
       },
     },
     {

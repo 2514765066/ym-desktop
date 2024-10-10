@@ -13,13 +13,7 @@ const eventNames = [
   "writeConfig",
   "shortcutTarget",
 
-  "update-available",
-  "update-error",
-  "download-progress",
-  "autoUpdate",
-  "manualUpdate",
-
-  "msg",
+  "openURL",
 ] as const;
 
 export type EventNames = (typeof eventNames)[number];
