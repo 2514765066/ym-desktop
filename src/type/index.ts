@@ -11,6 +11,7 @@ const eventNames = [
   "center",
   "readConfig",
   "writeConfig",
+  "shortcutTarget",
 
   "update-available",
   "update-error",

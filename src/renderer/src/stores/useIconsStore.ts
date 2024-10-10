@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { Icons, Files } from "@type";
+import { Icons } from "@type";
 import { useTaskbarStore } from "./useTaskbarStore";
 import { nanoid } from "nanoid";
 
@@ -26,10 +26,26 @@ export const useIconsStore = defineStore("icons", () => {
   };
 
   //添加
-  const add = (arr: Files) => {
+  const add = async (files: File[]) => {
+    const promiseFiles = files.map(async file => {
+      const name = file.name.split(".")[0].slice(0, 10);
+      const path: string = await electron.ipcRenderer.invoke(
+        "shortcutTarget",
+        file.path
+      );
+
+      return {
+        id: nanoid(),
+        name,
+        path,
+      };
+    });
+
+    const res = await Promise.all(promiseFiles);
+
     const pathArr = data.value.map(item => item.path);
 
-    for (const item of arr) {
+    for (const item of res) {
       if (pathArr.includes(item.path)) {
         return;
       }

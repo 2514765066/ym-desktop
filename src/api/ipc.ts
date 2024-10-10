@@ -2,6 +2,7 @@ import { windows, fromWebContents } from "ym-electron.js";
 import { ipcMain } from "./ipcMain";
 import { EventNames } from "../type";
 import { readJson, writeJson } from "../api/fs";
+import { execSync } from "child_process";
 
 //最小化
 ipcMain.on("minimize", () => {
@@ -80,4 +81,19 @@ ipcMain.handle("readConfig", async (_, name: string) => {
 ipcMain.handle("writeConfig", async (_, name: string, data: any) => {
   await writeJson(name, data);
   return true;
+});
+
+//获取快捷方式的目标路径
+ipcMain.handle("shortcutTarget", (_, path: string) => {
+  if (!path.includes(".lnk")) {
+    return path;
+  }
+
+  const normalizedPath = path.replace(/\\/g, "\\\\");
+
+  const command = `wmic path Win32_ShortcutFile where "name='${normalizedPath}'" get Target`;
+
+  const output = execSync(command).toString();
+
+  return output.split("\n")[1].trim();
 });

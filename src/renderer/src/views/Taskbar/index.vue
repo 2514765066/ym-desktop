@@ -1,14 +1,14 @@
 <template>
   <main class="Taskbar p-2">
     <vue-draggable
-      v-model="icons.data"
+      v-model="iconsStore.data"
       class="v-c-c"
       :animation="150"
       @drop="handleDrop"
       @dragover="handleDragover"
     >
       <Icon
-        v-for="(item, index) of icons.data"
+        v-for="(item, index) of iconsStore.data"
         :key="item.name"
         :data="item"
         :index="index"
@@ -22,26 +22,17 @@ import Icon from "@/components/Icon.vue";
 import { VueDraggable } from "vue-draggable-plus";
 import { useIconsStore } from "@/stores/useIconsStore";
 import { useTaskbarStore } from "@/stores/useTaskbarStore";
-import { nanoid } from "nanoid";
 
-const icons = useIconsStore();
+const iconsStore = useIconsStore();
 const { data } = storeToRefs(useTaskbarStore());
 
 //把桌面应用拖拽到任务栏上
 const handleDrop = (event: DragEvent) => {
   event.preventDefault();
 
-  const files = Array.from(event.dataTransfer!.files).map(file => {
-    const name = file.name.split(".")[0].slice(0, 10);
+  const files = Array.from(event.dataTransfer!.files);
 
-    return {
-      id: nanoid(),
-      name,
-      path: file.path,
-    };
-  });
-
-  icons.add(files);
+  iconsStore.add(files);
 };
 
 const handleDragover = (event: DragEvent) => {
@@ -51,10 +42,12 @@ const handleDragover = (event: DragEvent) => {
 //监视动态设置宽高
 watchEffect(() => {
   let width =
-    data.value.paddingX * 2 + 50 + icons.data.length * data.value.iconsSize;
+    data.value.paddingX * 2 +
+    50 +
+    iconsStore.data.length * data.value.iconsSize;
 
-  if (icons.data.length != 0) {
-    width += (icons.data.length - 1) * data.value.iconsGap;
+  if (iconsStore.data.length != 0) {
+    width += (iconsStore.data.length - 1) * data.value.iconsGap;
   }
 
   const height = data.value.height * 3;
