@@ -17,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-import { ElAlert } from "element-plus";
 import Row from "@/components/Row.vue";
 import Shortcut from "@/components/Shortcut.vue";
 import { useTaskbarStore } from "@/stores/useTaskbarStore";
