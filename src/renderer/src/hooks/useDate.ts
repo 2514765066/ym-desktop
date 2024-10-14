@@ -41,7 +41,7 @@ const getDate = () => {
   const currentDate = new Date();
 
   const month = currentDate.getMonth().toString();
-  const day = (currentDate.getDay() + 1).toString();
+  const day = currentDate.getDate().toString();
   const hours = currentDate.getHours().toString().padStart(2, "0");
   const minutes = currentDate.getMinutes().toString().padStart(2, "0");
 
