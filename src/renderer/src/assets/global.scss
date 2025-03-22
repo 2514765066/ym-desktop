@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: unset;
+  padding: unset;
+  box-sizing: border-box;
+  background-color: transparent;
+  user-select: none;
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  object-fit: cover;
+  object-position: top;
+}
+
+@font-face {
+  font-family: "logo";
+  src: url("./fonts/logo.ttf");
+}
+
+.text-color {
+  color: rgba(#fff, 0.81);
+}
+
+.text-color-darken {
+  color: rgba(#fff, 0.282);
+}
+
+.el-color-picker-dropdown {
+  background-color: #1d1e1f !important;
+
+  .el-color-dropdown__btns {
+    display: flex;
+    align-items: center;
+  }
+
+  .el-color-dropdown__link-btn {
+    display: none !important;
+  }
+
+  .el-color-dropdown__value {
+    flex: 1;
+  }
+}
+
+.el-input-number {
+  width: 120px;
+
+  .el-input__wrapper {
+    --el-input-bg-color: #272727 !important;
+  }
+}
+
+.el-switch {
+  --el-switch-off-color: transparent !important;
+  --el-switch-on-color: #bdbbe6 !important;
+
+  &:not(.is-checked) {
+    .el-switch__core {
+      border-color: #cdced0 !important;
+    }
+    .el-switch__action {
+      background-color: #cdced0 !important;
+    }
+  }
+
+  .el-switch__core {
+    border-color: #bdbbe6 !important;
+  }
+
+  .el-switch__action {
+    transform: scale(0.8);
+    background-color: #000 !important;
+  }
+}
+
+.el-slider {
+  width: 280px !important;
+  --el-slider-main-bg-color: #bdbbe6 !important;
+  --el-slider-runway-bg-color: #666 !important;
+  --el-slider-height: 4px !important;
+  --el-slider-button-size: 14px !important;
+
+  .el-slider__button {
+    border: none !important;
+    box-shadow: 0 0 5px #000 !important;
+  }
+}
+
+.el-popper {
+  --el-bg-color-overlay: #2f2f2f !important;
+  padding: 2px 8px !important;
+  border: none !important;
+
+  box-shadow: 0 0 4px 2px rgba(#000, 0.1) !important;
+}

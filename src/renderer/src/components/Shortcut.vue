@@ -1,12 +1,12 @@
 <template>
   <button
     ref="el"
-    class="fs-14 click c-ccc"
+    class="text-sm cursor-pointer text-color"
     :class="{ active: isEdit }"
     @focus="focus"
     @blur="blur"
   >
-    {{ isEdit ? "请按下要绑定的按键" : key }}
+    {{ isEdit ? "按下按键" : key }}
   </button>
 </template>
 
@@ -57,16 +57,12 @@ const blur = () => {
 
 <style scoped lang="scss">
 button {
-  width: 150px;
+  width: 100px;
   height: 30px;
   transition: 0.15s;
 
   border-radius: 0.3rem;
   background-color: #272727;
   border: 1px solid #454545;
-}
-
-.active {
-  border-color: #409eff;
 }
 </style>

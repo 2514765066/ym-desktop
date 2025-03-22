@@ -1,91 +1,48 @@
-import { windows, fromWebContents } from "ym-electron.js";
 import { ipcMain } from "./ipcMain";
-import { EventNames } from "../type";
-import { readJson, writeJson } from "../api/fs";
 import { execSync } from "child_process";
-import { shell } from "electron";
-
-//最小化
-ipcMain.on("minimize", () => {
-  const win = windows.get("manage")!;
-  win.minimize();
-});
-
-//最大化还原
-ipcMain.on("maximize", () => {
-  const win = windows.get("manage")!;
-  win.isMaximized() ? win.restore() : win.maximize();
-});
-
-//关闭
-ipcMain.on("close", () => {
-  const win = windows.get("manage")!;
-  win.hide();
-});
+import { browserWindows } from "./windows";
+import { BrowserWindow } from "electron";
+import { createTaskbar } from "../main/taskbar";
+import { write, read } from "./fs";
+import { setSize } from "ym-electron.js";
 
 //鼠标是否穿透窗口
-ipcMain.on("ignoreMouseEvents", ({ sender }, option: boolean) => {
-  const win = fromWebContents(sender);
+ipcMain.on("ignoreMouseEvents", ({ sender }, option) => {
+  const win = BrowserWindow.fromWebContents(sender)!;
+
   win.setIgnoreMouseEvents(option, {
     forward: true,
   });
 });
 
-//更新配置
-ipcMain.on("updateConfig", (_, name: string, data: any) => {
-  const win = windows.get(name)!;
-
-  win.webContents.send<EventNames>("updateConfig", data);
-});
-
 //修改宽高
-ipcMain.on("setSize", (_, name: string, width: number, height: number) => {
-  const win = windows.get(name)!;
+ipcMain.on("setSize", ({ sender }, option) => {
+  const win = BrowserWindow.fromWebContents(sender)!;
 
-  if (!win.resizable) {
-    win.setResizable(true);
-    win.setSize(width, height);
-    win.setResizable(false);
-    return;
-  }
-
-  win.setSize(width, height);
+  setSize(win, option);
 });
 
-//显示隐藏
-ipcMain.on("setVisible", (_, name: string, option: boolean) => {
-  const win = windows.get(name)!;
+//重置位置
+ipcMain.on("resetPosition", (_, name) => {
+  const win = browserWindows.get(name);
 
-  if (win.isVisible() && option == false) {
-    win.hide();
-    return;
-  }
+  if (!win) return;
 
-  if (!win.isVisible() && option == true) {
-    win.show();
-    return;
-  }
-});
-
-//水平居中
-ipcMain.on("center", (_, name: string, option) => {
-  const win = windows.get(name)!;
-  win.expandCenter(option);
+  win.setPosition(0, 0);
 });
 
 //读取配置
-ipcMain.handle("readConfig", async (_, name: string) => {
-  return await readJson(name);
+ipcMain.handle("readConfig", async (_, name) => {
+  return await read(name);
 });
 
 //写入配置
-ipcMain.handle("writeConfig", async (_, name: string, data: any) => {
-  await writeJson(name, data);
-  return true;
+ipcMain.on("wrtieConfig", async (_, name, data) => {
+  await write(name, data);
 });
 
 //获取快捷方式的目标路径
-ipcMain.handle("shortcutTarget", (_, path: string) => {
+ipcMain.handle("shortcutTarget", (_, path) => {
   if (!path.includes(".lnk")) {
     return path;
   }
@@ -99,7 +56,22 @@ ipcMain.handle("shortcutTarget", (_, path: string) => {
   return output.split("\n")[1].trim();
 });
 
-//打开网页
-ipcMain.on("openURL", (_, url: string) => {
-  shell.openExternal(url);
+//发送消息到taskbar窗口
+ipcMain.on("toTaskbar", async (_, data, visible) => {
+  let win = browserWindows.get("taskbar");
+
+  if (!visible && !win) {
+    return;
+  }
+
+  if (!visible && win) {
+    win.close();
+    return;
+  }
+
+  if (!win) {
+    win = await createTaskbar();
+  }
+
+  win.webContents.postMessage("toTaskbar", data);
 });

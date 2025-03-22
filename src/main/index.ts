@@ -1,24 +1,22 @@
 import {
+  isSecondeInstanceStart,
   onMounted,
   createTray,
-  windows,
-  isSecondeInstanceStart,
-  autoStart,
+  isDev,
 } from "ym-electron.js";
 import { app } from "electron";
+import { createMain } from "./main";
 import { icon } from "../api/path";
 import "../api/ipc";
-import "./manage";
-import "./clock";
-import "./music";
-import "./taskbar";
 import "../api/updater";
 
 if (isSecondeInstanceStart()) {
   app.exit();
 }
 
-onMounted(() => {
+onMounted(async () => {
+  const main = await createMain();
+
   const tray = createTray({
     label: "ym-desktop",
     iconPath: icon,
@@ -31,12 +29,10 @@ onMounted(() => {
   });
 
   tray.on("click", () => {
-    const win = windows.get("manage")!;
-
-    if (!win.isVisible()) {
-      win.show();
-    }
+    main.show();
   });
 });
 
-autoStart();
+app.setLoginItemSettings({
+  openAtLogin: !isDev(),
+});

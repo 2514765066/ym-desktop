@@ -1,32 +1,46 @@
-import { writeFile, readFile } from "fs/promises";
-import { existsSync } from "fs";
-import { resources } from "../api/path";
 import { join } from "path";
+import { existsSync } from "fs";
+import { writeFile, readFile, mkdir } from "fs/promises";
+import { resources } from "./path";
 
-/**
- * 写入json
- * @param name 写入文件名称
- * @param data 数据
- */
-export const writeJson = async (name: string, data: any) => {
+export const write = async (name: string, data: string) => {
+  if (!existsSync(resources)) {
+    await mkdir(resources);
+  }
+
   const path = join(resources, `${name}.json`);
 
-  await writeFile(path, JSON.stringify(data, null, 2));
+  await writeFile(path, data);
 };
 
-/**
- * 读取json
- * @param name 读取文件名称
- * @returns 文件内容
- */
-export const readJson = async (name: string) => {
+export const read = async (name: string) => {
   const path = join(resources, `${name}.json`);
 
   if (!existsSync(path)) {
-    return [];
+    return "";
   }
 
   const res = await readFile(path);
 
-  return JSON.parse(res.toString());
+  return res.toString();
+};
+
+//写入位置
+export const writePosition = (name: string, data: any) => {
+  const path = `${name}Position`;
+  write(path, JSON.stringify(data));
+};
+
+//读取位置
+export const readPosition = async (
+  name: string
+): Promise<Record<string, number[]>> => {
+  const path = `${name}Position`;
+  const res = await read(path);
+
+  if (!res) {
+    return {};
+  }
+
+  return JSON.parse(res);
 };

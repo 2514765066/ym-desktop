@@ -1,30 +1,35 @@
 <template>
-  <main class="Taskbar p-2">
+  <main class="p-2.5">
     <vue-draggable
-      v-model="iconsStore.data"
-      class="v-c-c"
+      class="taskbar flex items-center"
+      :class="{ 'taskbar-move': taskbarOption.move }"
+      v-model="iconOption"
       :animation="150"
       @drop="handleDrop"
       @dragover="handleDragover"
     >
-      <Icon
-        v-for="(item, index) of iconsStore.data"
-        :key="item.name"
+      <component
+        v-for="item of iconOption"
+        :is="item.isSplit ? TaskbarSplit : TaskbarIcon"
+        :key="item.id"
         :data="item"
-        :index="index"
-      ></Icon>
+      />
     </vue-draggable>
   </main>
 </template>
 
 <script setup lang="ts">
-import Icon from "@/components/Icon.vue";
+import TaskbarIcon from "@/components/TaskbarIcon/index.vue";
+import TaskbarSplit from "@/components/TaskbarIcon/Split.vue";
 import { VueDraggable } from "vue-draggable-plus";
-import { useIconsStore } from "@/stores/useIconsStore";
 import { useTaskbarStore } from "@/stores/useTaskbarStore";
+import { useIconStore } from "@/stores/useIconStore";
+import { useTaskbarEvent } from "@/hooks/useTaskBarEvent";
 
-const iconsStore = useIconsStore();
-const { data } = storeToRefs(useTaskbarStore());
+const { iconOption } = storeToRefs(useIconStore());
+const { addIcon } = useIconStore();
+const { taskbarOption } = storeToRefs(useTaskbarStore());
+useTaskbarEvent();
 
 //把桌面应用拖拽到任务栏上
 const handleDrop = (event: DragEvent) => {
@@ -32,7 +37,7 @@ const handleDrop = (event: DragEvent) => {
 
   const files = Array.from(event.dataTransfer!.files);
 
-  iconsStore.add(files);
+  addIcon(files);
 };
 
 const handleDragover = (event: DragEvent) => {
@@ -41,29 +46,10 @@ const handleDragover = (event: DragEvent) => {
 
 //监视动态设置宽高
 watchEffect(() => {
-  let width =
-    data.value.paddingX * 2 +
-    50 +
-    iconsStore.data.length * data.value.iconsSize;
+  const height = Math.ceil((taskbarOption.value.iconSize + 32) * 2);
 
-  if (iconsStore.data.length != 0) {
-    width += (iconsStore.data.length - 1) * data.value.iconsGap;
-  }
-
-  const height = data.value.height * 3;
-
-  electron.ipcRenderer.send("setSize", "taskbar", width, height);
-  electron.ipcRenderer.send("center", "taskbar", {
-    horizontal: true,
-  });
-});
-
-//鼠标穿透
-onMounted(() => {
-  document.body.addEventListener("mouseover", ({ target }) => {
-    const el = target as HTMLElement;
-
-    electron.ipcRenderer.send("ignoreMouseEvents", el.id == "app");
+  ipcRenderer.send("setSize", {
+    height,
   });
 });
 </script>
@@ -75,32 +61,24 @@ onMounted(() => {
   align-items: center;
 }
 
-.Taskbar {
-  > div {
-    --move: v-bind("data.move? 'drag':'no-drag'");
-    --height: calc(v-bind("data.height") * 1px);
-    --borderRadius: calc(v-bind("data.borderRadius") * 1px);
-    --paddingX: calc(v-bind("data.paddingX") * 1px);
-    --backgroundColor: v-bind("data.backgroundColor");
-    --iconsSize: calc(v-bind("data.iconsSize") * 1px);
-    --iconsGap: calc(v-bind("data.iconsGap") * 1px);
-    --iconsTipPosition: calc(v-bind("data.iconsTipPosition") * 1px);
-    --iconsTipShow: v-bind("data.iconsTipShow? 'block':'none'");
-    --splitColor: v-bind("data.splitColor");
-    --iconsShadow: v-bind(
-      "data.iconsShadow?'below 5px linear-gradient(to bottom, transparent 45%, rgba(0, 0, 0, 0.7))':'none'"
-    );
+.taskbar {
+  height: calc(v-bind("taskbarOption.height") * 1px);
 
-    -webkit-app-region: var(--move);
-    padding: 0 var(--paddingX);
-    height: var(--height);
-    border-radius: var(--borderRadius);
-    background-color: var(--backgroundColor);
-    gap: var(--iconsGap);
-  }
+  padding: 0 calc(v-bind("taskbarOption.paddingX") * 1px);
+
+  gap: calc(v-bind("taskbarOption.iconGap") * 1px);
+
+  border-radius: calc(v-bind("taskbarOption.borderRadius") * 1px);
+
+  background-color: v-bind("taskbarOption.backgroundColor");
 }
 
-.el-popper {
-  padding: 5px !important;
+.taskbar-shadow {
+  -webkit-box-reflect: below 5px
+    linear-gradient(to bottom, transparent 45%, rgba(0, 0, 0, 0.7));
+}
+
+.taskbar-move {
+  -webkit-app-region: drag;
 }
 </style>

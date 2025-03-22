@@ -1,39 +1,25 @@
-//事件名称
-const eventNames = [
-  "error:show",
-  "success:show",
-  "select:video:show",
-  "create:show",
-  "help:show",
-  "set:show",
-  "edit:show",
-] as const;
+import { MenuGrounp } from "@/lib/Menu";
 
 // 定义事件到函数类型的映射
-interface EventMap {
-  "error:show": (message: string) => void;
-  "success:show": (message: string) => void;
-  "select:video:show": () => void;
-  "create:show": () => void;
-  "help:show": () => void;
-  "set:show": () => void;
-  "edit:show": () => void;
-}
+type EventMap = {
+  "menu:show": (option: {
+    data: MenuGrounp[];
+    width: number;
+    x: number;
+    y: number;
+  }) => void;
+};
 
 type EventNames = keyof EventMap;
 
-type Listeners = Record<EventNames, Set<Function>>;
-
 class EventEmitter {
-  private listeners = {} as Listeners;
-
-  constructor() {
-    eventNames.forEach(name => {
-      this.listeners[name] = new Set();
-    });
-  }
+  private listeners = {} as Record<EventNames, Set<Function>>;
 
   on<T extends EventNames>(eventName: T, listener: EventMap[T]) {
+    if (!(eventName in this.listeners)) {
+      this.listeners[eventName] = new Set();
+    }
+
     this.listeners[eventName].add(listener);
   }
 

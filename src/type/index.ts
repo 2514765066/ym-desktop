@@ -1,31 +1,21 @@
-const eventNames = [
-  "minimize",
-  "close",
-  "maximize",
-  "is:maximize",
+export type IpcEvent = {
+  ignoreMouseEvents: (option: boolean) => void;
 
-  "ignoreMouseEvents",
-  "updateConfig",
-  "setSize",
-  "setVisible",
-  "center",
-  "readConfig",
-  "writeConfig",
-  "shortcutTarget",
+  setSize: (option: { width?: number; height?: number }) => void;
+  resetPosition: (name: WindowsName) => void;
 
-  "openURL",
-] as const;
+  readConfig: (name: ConfigName) => string;
+  wrtieConfig: (name: ConfigName, data: string) => void;
 
-export type EventNames = (typeof eventNames)[number];
+  shortcutTarget: (path: string) => string;
 
-export type Icon = {
-  id: string;
-  name: string;
-  path: string;
-  isSplit?: boolean;
+  toTaskbar: (data: string, visible?: boolean) => void;
+  reloadTaskbar: () => void;
 };
 
-export type Icons = Icon[];
+export type WindowsName = "manage" | "taskbar";
+
+export type ConfigName = "manage" | "taskbar" | "icons";
 
 export type File = {
   id: string;
@@ -33,4 +23,38 @@ export type File = {
   path: string;
 };
 
-export type Files = File[];
+//taskbar配置
+export type TaskbarOption = {
+  show: boolean;
+  move: boolean;
+
+  backgroundColor: string;
+  splitColor: string;
+  height: number;
+  borderRadius: number;
+  paddingX: number;
+
+  iconShadow: boolean;
+  iconTipShow: boolean;
+  iconTipFontColor: string;
+  iconTipBackgroundColor: string;
+  iconSize: number;
+  iconGap: number;
+
+  removeIconKey: string;
+  addSplitKey: string;
+};
+
+//icon配置
+export type IconOption = {
+  id: string;
+  name: string;
+  path: string;
+  isSplit?: boolean;
+};
+
+//文档信息
+export type DocInfo = {
+  name: string;
+  data: string[];
+};

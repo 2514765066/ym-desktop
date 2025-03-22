@@ -1,12 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import clockRouter from "./clockRouter";
-import taskbarRouter from "./taskbarRouter";
-import musicRouter from "./musicRouter";
-import aboutRouter from "./aboutRouter";
-import ManageView from "@/views/Manage/Index.vue";
-import TaskbarView from "@/views/Taskbar/Index.vue";
-import ClockView from "@/views/Clock/Index.vue";
-import MusicView from "@/views/Music/Index.vue";
+import ManageView from "@/views/Manage/index.vue";
+import TaskbarView from "@/views/Taskbar/index.vue";
+
+import Taskbar from "@/views/Manage/Taskbar/index.vue";
+import Doc from "@/views/Manage/Doc/index.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -19,23 +16,19 @@ const router = createRouter({
           path: "",
           redirect: "/manage/taskbar",
         },
-        aboutRouter,
-        taskbarRouter,
-        clockRouter,
-        musicRouter,
+        {
+          path: "taskbar",
+          component: Taskbar,
+        },
+        {
+          path: "/doc",
+          component: Doc,
+        },
       ],
     },
     {
       path: "/taskbar",
       component: TaskbarView,
-    },
-    {
-      path: "/clock",
-      component: ClockView,
-    },
-    {
-      path: "/music",
-      component: MusicView,
     },
   ],
 });

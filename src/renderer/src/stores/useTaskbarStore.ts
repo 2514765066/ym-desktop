@@ -1,38 +1,37 @@
 import { defineStore } from "pinia";
-// import { TaskbarConfig } from "@type";
-import { initConfig } from "@/hooks/useConfig";
+import { TaskbarOption } from "@type";
 
 export const useTaskbarStore = defineStore("taskbar", () => {
-  const data = ref({
+  //任务栏配置项
+  const taskbarOption = ref<TaskbarOption>({
     show: true,
-    move: false,
-    height: 80,
-    borderRadius: 20,
-    paddingX: 20,
-    iconsSize: 48,
-    iconsGap: 32,
-    backgroundColor: "rgba(255,255,255,0.6)",
+    move: true,
+
+    backgroundColor: "rgba(255,255,255,0.4)",
     splitColor: "#fff",
-    iconsTipPosition: 60,
-    iconsTipShow: true,
-    iconsShadow: false,
+    height: 80,
+    borderRadius: 10,
+    paddingX: 24,
+
+    iconShadow: false,
+    iconTipShow: true,
+    iconTipFontColor: "#fff",
+    iconTipBackgroundColor: "#1D1D1D",
+    iconSize: 40,
+    iconGap: 24,
+
     removeIconKey: "Delete",
     addSplitKey: "Insert",
   });
 
-  const get = async () => {
-    const config = await electron.ipcRenderer.invoke("readConfig", "taskbar");
+  //监听主窗口发送的任务栏配置项
+  ipcRenderer.on("toTaskbar", (_, data) => {
+    if (!data) return;
 
-    if (config.length == 0) return;
-
-    data.value = config;
-  };
-
-  initConfig("taskbar", data);
-  get();
+    taskbarOption.value = JSON.parse(data);
+  });
 
   return {
-    data,
-    get,
+    taskbarOption,
   };
 });
