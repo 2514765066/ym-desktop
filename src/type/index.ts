@@ -51,6 +51,7 @@ export type IconOption = {
   name: string;
   path: string;
   isSplit?: boolean;
+  pic: string;
 };
 
 //文档信息

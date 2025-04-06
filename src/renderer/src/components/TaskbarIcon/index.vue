@@ -5,7 +5,7 @@
     @contextmenu="handleContextMenu"
   >
     <img
-      :src="src"
+      :src="data.pic"
       class="cursor-pointer"
       :class="{ 'taskbar-shadow': taskbarOption.iconShadow }"
       @click="openPath"
@@ -43,9 +43,6 @@ const props = defineProps<{
 }>();
 
 const textRef = ref<HTMLElement>();
-
-//图标
-const src = ref(api.getIcon(props.data.path));
 
 //处理右键
 const handleContextMenu = () => {

@@ -25,6 +25,7 @@ export const useIconStore = defineStore("icon", () => {
       id: nanoid(),
       name: "",
       path: "",
+      pic: "",
       isSplit: true,
     });
   };
@@ -38,6 +39,7 @@ export const useIconStore = defineStore("icon", () => {
       return {
         name,
         path,
+        pic: api.getIcon(path),
         id: nanoid(),
       };
     });
@@ -85,7 +87,25 @@ export const useIconStore = defineStore("icon", () => {
     //处理无数据
     if (!data) return;
 
-    iconOption.value = JSON.parse(data);
+    const res: IconOption[] = JSON.parse(data);
+
+    //处理2.1.0版本的适配
+    let isGetIcon = false;
+    res.forEach(item => {
+      if (item.pic) {
+        return;
+      }
+
+      item.pic = api.getIcon(item.path);
+      isGetIcon = true;
+    });
+
+    if (isGetIcon) {
+      ipcRenderer.send("wrtieConfig", "icons", JSON.stringify(res));
+    }
+    //处理2.1.0版本的适配结束
+
+    iconOption.value = res;
   };
 
   //初始化
@@ -95,12 +115,8 @@ export const useIconStore = defineStore("icon", () => {
     //写入文件
     watch(
       iconOption,
-      () => {
-        ipcRenderer.send(
-          "wrtieConfig",
-          "icons",
-          JSON.stringify(iconOption.value)
-        );
+      val => {
+        ipcRenderer.send("wrtieConfig", "icons", JSON.stringify(val));
       },
       {
         deep: true,
